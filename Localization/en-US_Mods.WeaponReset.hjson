@@ -1,1 +1,15 @@
+Projectiles: {
+	OreSwordProj.DisplayName: Ore Sword Proj
+	SwordQi.DisplayName: Sword Qi
+}
 
+Configs: {
+	Setting: {
+		DisplayName: Setting
+
+		SettingNoResetWeapon: {
+			Label: Set No Reset Weapon
+			Tooltip: ""
+		}
+	}
+}
