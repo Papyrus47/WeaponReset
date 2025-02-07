@@ -8,6 +8,7 @@
 		
 	</PropertyGroup>
 	<ItemGroup>
+	  <None Remove="Content\Dusts\Particles\GlowBall.png" />
 	  <None Remove="Localization\zh-Hans_Mods.WeaponReset.hjson" />
 	</ItemGroup>
 	<ItemGroup>

@@ -185,7 +185,7 @@ namespace WeaponReset.Command
         /// <param name="drawCorrections">绘制修正</param>
         public virtual void ProjFixedPlayerCenter(Player player, float length = 0f, bool isUseSwing = false, bool drawCorrections = false)
         {
-            Center = player.RotatedRelativePoint(player.MountedCenter);
+            Center = player.RotatedRelativePoint(player.MountedCenter,true);
             _drawCorrections = drawCorrections;
             if (!_drawCorrections) Center += velocity.SafeNormalize(default) * length;
             _changeHeldLength = length;

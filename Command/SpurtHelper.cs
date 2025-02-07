@@ -8,6 +8,12 @@ namespace WeaponReset.Command
     public class SpurtHelper : ICloneable
     {
         public delegate void DrawSpurt(SpurtHelper spurt, SpriteBatch sb, params object[] args);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="spurt"></param>
+        /// <param name="sb"></param>
+        /// <param name="args"><see cref=">float"/>参数1：X缩放</param>
         public static void ASpurtDraw_Proj(SpurtHelper spurt, SpriteBatch sb, params object[] args)
         {
             if (spurt.Owner is not Projectile)
@@ -17,10 +23,11 @@ namespace WeaponReset.Command
             Vector2 drawSize = new Vector2(spurt.Size.X, spurt.Size.Y);
             Main.instance.LoadProjectile(927);
             Main.instance.LoadProjectile(projectile.type);
+            float scaleX = args.Length > 0 ? (float)args[0] : 1f;
             #region 绘制突刺
             Texture2D tex2 = TextureAssets.Projectile[927].Value;
             Vector2 scale = new Vector2(spurt.SpurtLenght / tex2.Width, 1f) * projectile.scale;
-            sb.Draw(tex2, drawPos, null, projectile.GetAlpha(Color.White), projectile.rotation - MathHelper.PiOver4, new Vector2(tex2.Width / 4f, tex2.Height / 2f), scale, SpriteEffects.None, 0f);
+            sb.Draw(tex2, drawPos, null, projectile.GetAlpha(Color.White), projectile.rotation - MathHelper.PiOver4, new Vector2(tex2.Width / 4f * scaleX, tex2.Height / 2f), scale, SpriteEffects.None, 0f);
             #endregion
             #region 绘制弹幕
             Texture2D tex = TextureAssets.Projectile[projectile.type].Value;

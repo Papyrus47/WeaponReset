@@ -37,6 +37,8 @@ namespace WeaponReset.Command
         public virtual bool PreDraw(SpriteBatch sb, ref Color lightColor) => true;
         public virtual void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone) { }
         public virtual void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers) { }
+        public virtual void ModifyHitPlayer(Player target, ref Player.HurtModifiers hurtModifiers) { }
+        public virtual void OnHitPlayer(Player target, Player.HurtInfo hurt) { }
         public virtual bool? CanDamage() => null;
         public virtual bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) => false;
         /// <summary>

@@ -108,6 +108,11 @@ namespace WeaponReset.Content.Weapons
             ItemLoader.ModifyHitNPC(SpawnItem, Player, target, ref modifiers); // 调用Mod物品的ModifyHitNPC
             CurrentSkill.ModifyHitNPC(target, ref modifiers);
         }
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
+        {
+            ItemLoader.ModifyHitPvp(SpawnItem, Player, target, ref modifiers); // 调用Mod物品的ModifyHitPvp
+            CurrentSkill.ModifyHitPlayer(target, ref modifiers);
+        }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             Type type = Player.GetType();
@@ -118,6 +123,17 @@ namespace WeaponReset.Content.Weapons
             CurrentSkill.OnHitNPC(target, hit, damageDone); // 技能命中效果
             ItemLoader.OnHitNPC(SpawnItem, Player, target, hit, damageDone); // Mod物品命中
             TheUtility.VillagesItemOnHit(SpawnItem, Player, Projectile.Hitbox, Projectile.originalDamage, Projectile.knockBack, target.whoAmI, Projectile.damage, damageDone); // 原版物品命中
+        }
+        public override void OnHitPlayer(Player target, Player.HurtInfo info)
+        {
+            Type type = Player.GetType();
+            type.GetField("_spawnVolcanoExplosion", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(Player, true);
+            type.GetField("_spawnBloodButcherer", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(Player, true);
+            type.GetField("_batbatCanHeal", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(Player, true);
+            type.GetField("_spawnTentacleSpikes", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(Player, true);
+            CurrentSkill.OnHitPlayer(target, info); // 技能命中效果
+            ItemLoader.OnHitPvp(SpawnItem, Player, target, info); // Mod物品命中
+            TheUtility.VillagesItemOnHit(SpawnItem, Player, Projectile.Hitbox, Projectile.originalDamage, Projectile.knockBack, target.whoAmI, Projectile.damage, Projectile.originalDamage); // 原版物品命中
         }
         #endregion
         public abstract void Init();

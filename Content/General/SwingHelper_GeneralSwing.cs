@@ -2,6 +2,7 @@
 using Terraria.Audio;
 using Terraria.Graphics.CameraModifiers;
 using Terraria.ID;
+using Terraria.WorldBuilding;
 using WeaponReset.Command;
 
 namespace WeaponReset.Content.General
@@ -29,6 +30,7 @@ namespace WeaponReset.Content.General
         public class OnAtk
         {
             public delegate void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers);
+            public delegate void ModifyHitPlayer(Player target, ref Player.HurtModifiers hurtModifiers);
             /// <summary>
             /// 挥舞所需要时间
             /// </summary>
@@ -46,9 +48,17 @@ namespace WeaponReset.Content.General
             /// </summary>
             public Action<NPC, NPC.HitInfo, int> OnHit;
             /// <summary>
+            /// 命中玩家时刻
+            /// </summary>
+            public Action<Player, Player.HurtInfo> OnHit_Player;
+            /// <summary>
             /// 即将命中的时候
             /// </summary>
             public ModifyHitNPC ModifyHit;
+            /// <summary>
+            /// 即将命中玩家
+            /// </summary>
+            public ModifyHitPlayer ModifyHit_Player;
             /// <summary>
             /// 在改变时候
             /// </summary>
@@ -236,10 +246,23 @@ namespace WeaponReset.Content.General
             if(setting != null)
                 OnHitStopTime = setting.OnHitStopTime * (Projectile.extraUpdates + 1);
         }
+        public override void OnHitPlayer(Player target, Player.HurtInfo hurt)
+        {
+            if (CanMoveScreen)
+                Main.instance.CameraModifiers.Add(new PunchCameraModifier(Projectile.Center, Main.rand.NextVector2Unit(), 3, 2, 2));
+            onAtk.OnHit_Player?.Invoke(target, hurt);
+            if (setting != null)
+                OnHitStopTime = setting.OnHitStopTime * (Projectile.extraUpdates + 1);
+        }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
             onAtk.ModifyHit?.Invoke(target, ref modifiers);
             modifiers.SourceDamage += setting.ActionDmg - 1;
+        }
+        public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers hurtModifiers)
+        {
+            onAtk.ModifyHit_Player?.Invoke(target, ref hurtModifiers);
+            hurtModifiers.SourceDamage += setting.ActionDmg - 1;
         }
         public override bool? CanDamage()
         {

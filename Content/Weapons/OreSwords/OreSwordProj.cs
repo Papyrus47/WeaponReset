@@ -76,6 +76,28 @@ namespace WeaponReset.Content.Weapons.OreSwords
                     return Color.OrangeRed with { A = 0 } * factor;
                 case ItemID_Chinese.紫挥棒鱼:
                     return Color.Purple with { A = 0 } * factor;
+                case ItemID_Chinese.僵尸臂:
+                case ItemID_Chinese.仙人掌剑:
+                    return Color.Green with { A = 0 } * factor;
+                case ItemID_Chinese.冰雪刃:
+                    return Color.LightSkyBlue with { A = 0 } * factor;
+                case ItemID_Chinese.血腥屠刀:
+                    return Color.Red with { A = 0 } * factor;
+                case ItemID_Chinese.星怒:
+                    return Color.Lerp(Color.Pink,Color.Yellow,factor) with { A = 0 } * factor;
+                case ItemID_Chinese.草剑:
+                    return Color.Green with { A = 0 } * factor;
+                case ItemID_Chinese.永夜刃:
+                    return Color.Purple with { A = 0 } * factor;
+                case ItemID_Chinese.魔光剑:
+                    return Color.Purple with { A = 0 } * factor;
+                case ItemID_Chinese.蝙蝠棍:
+                    return Color.MediumPurple with { A = 0 } * factor;
+                case ItemID_Chinese.养蜂人:
+                    return new Color(34,23,60) with { A = 0 };
+                case ItemID_Chinese.附魔剑:
+                    return Color.DeepSkyBlue with { A = 0 } * factor;
+
             }
             return default;
         }
@@ -93,8 +115,8 @@ namespace WeaponReset.Content.Weapons.OreSwords
         /// </summary>
         public virtual void OnAtk(SwingHelper_GeneralSwing swingHelper_GeneralSwing)
         {
-            //    if ((int)Projectile.ai[1] == (int)swingHelper_GeneralSwing.onAtk.SwingTime / 4 * 3 * (Projectile.extraUpdates + 1) && Main.myPlayer == Player.whoAmI)
-            //        Projectile.NewProjectile(new SwordQi.SwordQiSource(SwingHelper.Clone() as SwingHelper, GetColor), Projectile.Center, (Main.MouseWorld - Projectile.Center).SafeNormalize(default) * 10, ModContent.ProjectileType<SwordQi>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+            if ((int)Projectile.ai[1] == (int)swingHelper_GeneralSwing.onAtk.SwingTime / 2 * (Projectile.extraUpdates + 1) && Main.myPlayer == Player.whoAmI)
+                TheUtility.Player_ItemCheck_Shoot(Player, SpawnItem, Projectile.damage);
         }
         public virtual void LastModifyHit(NPC target, ref NPC.HitModifiers hitModifiers)
         {
@@ -615,6 +637,11 @@ namespace WeaponReset.Content.Weapons.OreSwords
             SwingAcross.onAtk.OnChange += NoHitChange;
             SwingDown.onAtk.OnChange += NoHitChange;
             StorngSlash.onAtk.ModifyHit += LastModifyHit;
+
+            SwingUp.onAtk.OnUse += OnAtk;
+            SwingAcrossDown.onAtk.OnUse += OnAtk;
+            SwingAcross.onAtk.OnUse += OnAtk;
+            SwingDown.onAtk.OnUse += OnAtk;
 
             SwingUp.CanMoveScreen = SwingAcrossDown.CanMoveScreen = SwingAcross.CanMoveScreen = SwingDown.CanMoveScreen = StorngSlash.CanMoveScreen = SwingAcross2.CanMoveScreen = SwingAcross_Dash.CanMoveScreen = SwingAcross3.CanMoveScreen = StorngSlash2.CanMoveScreen = true;
             #endregion

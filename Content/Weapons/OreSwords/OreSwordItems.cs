@@ -40,7 +40,17 @@ namespace WeaponReset.Content.Weapons.OreSwords
             ItemID_Chinese.绿陨石光剑,
             ItemID_Chinese.养蜂人,
             ItemID_Chinese.火山,
-            ItemID_Chinese.紫挥棒鱼
+            ItemID_Chinese.紫挥棒鱼,
+            ItemID_Chinese.僵尸臂,
+            ItemID_Chinese.冰雪刃,
+            ItemID_Chinese.血腥屠刀,
+            ItemID_Chinese.星怒,
+            ItemID_Chinese.草剑,
+            ItemID_Chinese.永夜刃,
+            ItemID_Chinese.魔光剑,
+            ItemID_Chinese.蝙蝠棍,
+            ItemID_Chinese.附魔剑,
+            ItemID_Chinese.仙人掌剑
         };
         public override void SetDefaults(Item entity)
         {
