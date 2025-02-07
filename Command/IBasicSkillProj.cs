@@ -39,10 +39,12 @@ namespace WeaponReset.Command
         public void SendData(BinaryWriter binaryWriter)
         {
             binaryWriter.Write(ID);
+            Main.NewText(ID);
         }
         public void ReceiveData(BinaryReader binaryReader)
         {
             ID = binaryReader.ReadString();
+            Main.NewText(ID);
         }
         public void Init();
         public void SwitchSkill()

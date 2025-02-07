@@ -214,7 +214,7 @@ namespace WeaponReset.Content.General
             Projectile.knockBack = Player.GetWeaponKnockback(Player.HeldItem);
             Projectile.CritChance = Player.GetWeaponCrit(Player.HeldItem);
             TheUtility.ResetProjHit(Projectile);
-            Projectile.netUpdate = true;
+            SyncData();
             Projectile.numHits = 0;
         }
         public override void OnSkillDeactivate()

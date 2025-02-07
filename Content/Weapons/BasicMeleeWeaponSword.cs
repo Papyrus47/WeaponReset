@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria.DataStructures;
@@ -98,14 +99,15 @@ namespace WeaponReset.Content.Weapons
         #region 同步环节
         public override void SendExtraAI(BinaryWriter writer)
         {
-            SwingHelper?.SendData(writer);
             (this as IBasicSkillProj).SendData(writer);
+            SwingHelper?.SendData(writer);
+            writer.Write(Player.controlUseTile);
         }
-
         public override void ReceiveExtraAI(BinaryReader reader)
         {
-            SwingHelper?.RendData(reader);
             (this as IBasicSkillProj).ReceiveData(reader);
+            SwingHelper?.RendData(reader);
+            Player.controlUseTile = reader.ReadBoolean();
         }
         #endregion
         public override bool ShouldUpdatePosition() => false;
@@ -123,6 +125,11 @@ namespace WeaponReset.Content.Weapons
         }
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
+            Type type = Player.GetType();
+            type.GetField("_spawnVolcanoExplosion", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(Player, true);
+            type.GetField("_spawnBloodButcherer", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(Player, true);
+            type.GetField("_batbatCanHeal", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(Player, true);
+            type.GetField("_spawnTentacleSpikes", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(Player, true);
             CurrentSkill.OnHitNPC(target, hit, damageDone); // 技能命中效果
             ItemLoader.OnHitNPC(SpawnItem, Player, target, hit, damageDone); // Mod物品命中
             TheUtility.VillagesItemOnHit(SpawnItem, Player, Projectile.Hitbox, Projectile.originalDamage, Projectile.knockBack, target.whoAmI, Projectile.damage, damageDone); // 原版物品命中

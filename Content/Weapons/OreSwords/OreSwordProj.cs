@@ -49,8 +49,33 @@ namespace WeaponReset.Content.Weapons.OreSwords
                 case ItemID.PalmWoodSword:
                 case ItemID.AshWoodSword:
                 case ItemID.BorealWoodSword:
+                case ItemID.ShadewoodSword:    // 暗影木剑
+                case ItemID.EbonwoodSword:      // 黑木剑
                     return Color.Brown with { A = 0 } * factor;
-
+                case ItemID_Chinese.骨剑:
+                    return Color.WhiteSmoke with { A = 0 } * factor;
+                case ItemID_Chinese.颌骨剑:
+                    return Color.Yellow with { A = 0 } * factor;
+                case ItemID_Chinese.糖棒剑:
+                    return Color.WhiteSmoke with { A = 0 } * factor;
+                case ItemID_Chinese.橙陨石光剑:
+                    return Color.Orange with { A = 0 } * factor;
+                case ItemID_Chinese.白陨石光剑:
+                    return Color.White with { A = 0 } * factor;
+                case ItemID_Chinese.红陨石光剑:
+                    return Color.Red with { A = 0 } * factor;
+                case ItemID_Chinese.黄陨石光剑:
+                    return Color.Yellow with { A = 0 } * factor;
+                case ItemID_Chinese.蓝陨石光剑:
+                    return Color.Blue with { A = 0 } * factor;
+                case ItemID_Chinese.紫陨石光剑:
+                    return Color.Purple with { A = 0 } * factor;
+                case ItemID_Chinese.绿陨石光剑:
+                    return Color.Green with { A = 0 } * factor;
+                case ItemID_Chinese.火山:
+                    return Color.OrangeRed with { A = 0 } * factor;
+                case ItemID_Chinese.紫挥棒鱼:
+                    return Color.Purple with { A = 0 } * factor;
             }
             return default;
         }
@@ -59,15 +84,10 @@ namespace WeaponReset.Content.Weapons.OreSwords
             base.ModifyHitNPC(target, ref modifiers);
             modifiers.SourceDamage += 1.5f;
         }
-        public override void AI()
-        {
-            if (Player != null && Player.itemTimeMax <= 2)
-            {
-                Projectile.Kill();
-                return;
-            }
-            base.AI();
-        }
+        //public override void AI()
+        //{
+        //    base.AI();
+        //}
         /// <summary>
         /// 这里是用于发射弹幕
         /// </summary>
@@ -169,7 +189,7 @@ namespace WeaponReset.Content.Weapons.OreSwords
                 Main.instance.CameraModifiers.Add(new PunchCameraModifier(Projectile.Center, Projectile.velocity.SafeNormalize(default).RotatedByRandom(0.7), 7f, 15f, 15));
             };
 
-            float attackSpeed = Player.GetWeaponAttackSpeed(SpawnItem) * 20;
+            float attackSpeed = Player.GetWeaponAttackSpeed(SpawnItem) * SpawnItem.useTime;
 
             ChangeToRot = (_) => // 改变玩家朝向与剑朝向的旋转
             {

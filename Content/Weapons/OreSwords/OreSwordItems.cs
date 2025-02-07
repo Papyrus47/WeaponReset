@@ -24,10 +24,23 @@ namespace WeaponReset.Content.Weapons.OreSwords
             ItemID.TinBroadsword,     // 锡剑
             ItemID.WoodenSword,       // 木剑
             ItemID.PalmWoodSword,     // 棕榈木剑
-            ItemID.AshWoodSword,      // 桦木剑
+            ItemID.AshWoodSword,      // 灰烬木剑
             ItemID.BorealWoodSword,   // 冰霜木剑
             ItemID.ShadewoodSword,    // 暗影木剑
-            ItemID.EbonwoodSword      // 黑木剑
+            ItemID.EbonwoodSword,      // 黑木剑
+            ItemID_Chinese.骨剑,
+            ItemID_Chinese.颌骨剑,
+            ItemID_Chinese.糖棒剑,
+            ItemID_Chinese.橙陨石光剑,
+            ItemID_Chinese.白陨石光剑,
+            ItemID_Chinese.红陨石光剑,
+            ItemID_Chinese.黄陨石光剑,
+            ItemID_Chinese.蓝陨石光剑,
+            ItemID_Chinese.紫陨石光剑,
+            ItemID_Chinese.绿陨石光剑,
+            ItemID_Chinese.养蜂人,
+            ItemID_Chinese.火山,
+            ItemID_Chinese.紫挥棒鱼
         };
         public override void SetDefaults(Item entity)
         {

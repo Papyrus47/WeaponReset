@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,10 @@ namespace WeaponReset
             {
                 UseResetBind = KeybindLoader.RegisterKeybind(this, nameof(UseResetBind), Microsoft.Xna.Framework.Input.Keys.F);
             }
+        }
+        public override void HandlePacket(BinaryReader reader, int whoAmI)
+        {
+            
         }
         public override void Unload()
         {
