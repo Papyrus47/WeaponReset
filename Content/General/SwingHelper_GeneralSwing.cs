@@ -203,6 +203,8 @@ namespace WeaponReset.Content.General
             SwingHelper.SetRotVel(0);
             Projectile.originalDamage = Player.GetWeaponDamage(Player.HeldItem);
             Projectile.damage = Projectile.originalDamage;
+            Projectile.knockBack = Player.GetWeaponKnockback(Player.HeldItem);
+            Projectile.CritChance = Player.GetWeaponCrit(Player.HeldItem);
             TheUtility.ResetProjHit(Projectile);
             Projectile.netUpdate = true;
             Projectile.numHits = 0;

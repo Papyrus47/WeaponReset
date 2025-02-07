@@ -11,6 +11,7 @@ namespace WeaponReset.Content.Weapons
     {
         public static bool CanResetWeapon = true;
         public abstract HashSet<int> ResetWeaponID { get; }
+        public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
             if (Setting.Instance.SettingNoResetWeapon.Count > 0)

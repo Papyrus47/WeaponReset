@@ -67,6 +67,9 @@ namespace WeaponReset.Command
             //    writer.WriteVector2(oldVels[i]);
             //}
             writer.Write(_velRotBy);
+            writer.WriteVector2(StartVel);
+            writer.WriteVector2(VelScale);
+            writer.Write(VisualRotation);
         }
         public virtual void RendData(BinaryReader reader)
         {
@@ -75,7 +78,11 @@ namespace WeaponReset.Command
             //    oldVels[i] = reader.ReadVector2();
             //}
             _velRotBy = reader.ReadSingle();
+            StartVel = reader.ReadVector2();
+            VelScale = reader.ReadVector2();
+            VisualRotation = reader.ReadSingle();
         }
+        
         public virtual void SetRotVel(float rotVel)
         {
             _velRotBy = rotVel;

@@ -70,7 +70,7 @@ namespace WeaponReset.Content.Weapons
                 SpawnItem = itemUse.Item;
                 Player = itemUse.Player;
                 Projectile.Name = SpawnItem.Name;
-                SwingHelper = new(Projectile, 64, TextureAssets.Item[SpawnItem.type]);
+                SwingHelper = new(Projectile, 40, TextureAssets.Item[SpawnItem.type]);
                 Projectile.scale = Player.GetAdjustedItemScale(SpawnItem);
                 Projectile.Size = SpawnItem.Size * Projectile.scale;
                 SwingHelper.DrawTrailCount = 3; // 绘制拖尾的次数
