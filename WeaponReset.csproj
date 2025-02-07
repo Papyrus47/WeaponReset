@@ -11,7 +11,13 @@
 	  <None Remove="Localization\zh-Hans_Mods.WeaponReset.hjson" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Folder Include="Content\Dusts\Dusts\" />
 	  <Folder Include="Content\Items\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Reference Include="InnoVault">
+	    <HintPath>..\InnoVault.dll</HintPath>
+	  </Reference>
 	</ItemGroup>
 
 	<!-- References -->

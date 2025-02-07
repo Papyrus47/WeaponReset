@@ -42,7 +42,10 @@ namespace WeaponReset.Content.General
                 case 1: // 挥舞
                     SwingHelper.ProjFixedPlayerCenter(Player, 0, true);
                     Projectile.extraUpdates = 4;
-                    Projectile.ai[1]++;
+                    if (OnHitStopTime <= 0)
+                        Projectile.ai[1]++;
+                    else
+                        OnHitStopTime--;
                     float swingTime = Projectile.ai[1] / (onAtk.SwingTime * (Projectile.extraUpdates + 1));
                     SyncData();
                     if (swingTime > 1)

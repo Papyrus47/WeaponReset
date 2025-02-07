@@ -108,6 +108,10 @@ namespace WeaponReset.Content.General
             /// 必须设置的绘制
             /// </summary>
             public PreDraw preDraw = (_, _) => false;
+            /// <summary>
+            /// 命中卡肉
+            /// </summary>
+            public int OnHitStopTime;
         }
         public Setting setting;
         public PreAtk preAtk;
@@ -120,6 +124,7 @@ namespace WeaponReset.Content.General
         /// 抖屏开关
         /// </summary>
         public bool CanMoveScreen = false;
+        public int OnHitStopTime = 0;
 
         public SwingHelper_GeneralSwing(ModProjectile modProjectile, Setting setting, PreAtk preAtk, PostAtk postAtk, OnAtk onAtk, SwingHelper swingHelper, Player player) : base(modProjectile)
         {
@@ -157,7 +162,10 @@ namespace WeaponReset.Content.General
                 case 1: // 挥舞
                     SwingHelper.ProjFixedPlayerCenter(Player, 0, true);
                     Projectile.extraUpdates = 4;
-                    Projectile.ai[1]++;
+                    if(OnHitStopTime <= 0)
+                        Projectile.ai[1]++;
+                    else
+                        OnHitStopTime--;
                     float swingTime = Projectile.ai[1] / (onAtk.SwingTime * (Projectile.extraUpdates + 1));
                     if (swingTime > 1)
                     {
@@ -226,6 +234,8 @@ namespace WeaponReset.Content.General
             if (CanMoveScreen)
                 Main.instance.CameraModifiers.Add(new PunchCameraModifier(Projectile.Center, Main.rand.NextVector2Unit(), 3, 2, 2));
             onAtk.OnHit?.Invoke(target, hit, damageDone);
+            if(setting != null)
+                OnHitStopTime = setting.OnHitStopTime * (Projectile.extraUpdates + 1);
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {

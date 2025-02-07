@@ -1,10 +1,12 @@
-﻿using System.IO;
+﻿using InnoVault.PRT;
+using System.IO;
 using Terraria;
 using Terraria.Audio;
 using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.Graphics.CameraModifiers;
 using WeaponReset.Command;
+using WeaponReset.Content.Dusts.Particles;
 using WeaponReset.Content.General;
 
 namespace WeaponReset.Content.Weapons.OreSwords
@@ -103,7 +105,8 @@ namespace WeaponReset.Content.Weapons.OreSwords
                 }
                 else
                 {
-                    hurtModifiers.SourceDamage *= 0.5f;
+                    player.GetModPlayer<WeaponResetPlayer>().OreSwordDef = 300;
+                    hurtModifiers.SourceDamage *= 0.2f;
                     SoundEngine.PlaySound(SoundID.NPCHit4 with { Pitch = -0.4f }, Player.position);
                 }
 
@@ -127,24 +130,44 @@ namespace WeaponReset.Content.Weapons.OreSwords
                 return false;
             }; // 绘制弹幕
 
-            Func<float, float> swingChange = (time) => MathHelper.SmoothStep(0, 1f, time); // 缓动函数
+            Func<float, float> swingChange = (time) => MathHelper.SmoothStep(0, 1f, MathF.Pow(time,2.5f)); // 缓动函数
 
             OnHitEffect = (target, hit, damage) =>
             {
-                for (int i = 0; i <= 30; i++)
+                if(Player.whoAmI == Main.myPlayer)
+                    Projectile.netUpdate = true;
+                if (Main.netMode != NetmodeID.Server) // 仅有本地端允许查看
                 {
-                    var dust = Dust.NewDustPerfect(target.Center, DustID.Smoke, Projectile.velocity.RotatedBy(MathHelper.PiOver2 * Player.direction).RotatedByRandom(0.3).SafeNormalize(default) * i * 0.5f, 0, GetColor(1), 0.8f);
-                    dust.noGravity = true;
+                    for (int i = -70; i <= 70; i++)
+                    {
+                        var dust = Dust.NewDustPerfect(target.Center, DustID.FireworksRGB, Projectile.velocity.RotatedByRandom(6.28) * i * 0.0005f, 0, GetColor(0.3f), 0.8f);
+                        dust.noGravity = false;
+                    }
 
-                    //dust = Dust.NewDustPerfect(target.Center, DustID.CrystalPulse, Projectile.velocity.SafeNormalize(default) * i * 0.5f, 100, Color.Purple, 0.8f);
-                    //dust.noGravity = true;
+                    var extra98 = PRTLoader.NewParticle<Extra98_OnHit>(target.Center, Projectile.velocity * 0.05f, GetColor(1), 1f);
+                    extra98.Origin = extra98.TexValue.Size() * 0.5f;
+                    extra98.Update = (t) =>
+                    {
+                        t.Rotation = t.Velocity.ToRotation();
+                        t.Scale_Vector2 = new Vector2(1f - t.LifetimeCompletion, t.Velocity.Length());
+                        return true;
+                    };
+                    extra98.Draw = (t) =>
+                    {
+                        Main.spriteBatch.Draw(t.TexValue, t.Position - Main.screenPosition, null, t.Color, t.Rotation, t.Origin, t.Scale_Vector2, SpriteEffects.None, 0);
+                        return false;
+                    };
                 }
-                Main.instance.CameraModifiers.Add(new PunchCameraModifier(Projectile.Center, Projectile.velocity.SafeNormalize(default).RotatedByRandom(0.7), 3f, 2f, 2));
+                //Main.instance.CameraModifiers.Add(new PunchCameraModifier(Projectile.Center, Projectile.velocity.SafeNormalize(default).RotatedByRandom(0.7), 3f, 2f, 2));
                 if (Player.velocity.Y != 0)
                     Player.velocity.Y = -10;
                 //Player.velocity += (Player.Center - target.Center) * (Projectile.Size.Length() / Math.Max(Projectile.Size.Length() / 4, (Player.Center - target.Center).Length()) * 0.06f);
 
             }; // 击中效果
+            Action<NPC, NPC.HitInfo, int> StrongPunchCamera = (_, _, _) =>
+            {
+                Main.instance.CameraModifiers.Add(new PunchCameraModifier(Projectile.Center, Projectile.velocity.SafeNormalize(default).RotatedByRandom(0.7), 7f, 15f, 15));
+            };
 
             float attackSpeed = Player.GetWeaponAttackSpeed(SpawnItem) * 20;
 
@@ -280,7 +303,7 @@ namespace WeaponReset.Content.Weapons.OreSwords
 
             }, SwingHelper, Player);
 
-            SwingHelper_GeneralSwing SwingDown = new(this, // 斜下砍
+            SwingHelper_GeneralSwing SwingDown = new(this, // 横砍
             setting: new() // 设置
             {
                 SwingLenght = Projectile.Size.Length(),// 挥舞长度
@@ -311,7 +334,7 @@ namespace WeaponReset.Content.Weapons.OreSwords
                 OnUse = SetFullRot
             }, SwingHelper, Player);
 
-            SwingHelper_CountSwing StorngSlash = new(this, // 斜下砍
+            SwingHelper_CountSwing StorngSlash = new(this, // 下砍
             setting: new() // 设置
             {
                 SwingLenght = Projectile.Size.Length(),// 挥舞长度
@@ -322,6 +345,7 @@ namespace WeaponReset.Content.Weapons.OreSwords
                 StartVel = -Vector2.UnitY.RotatedBy(-0.4f),// 起始速度朝向
                 VelScale = new Vector2(2f, 0.8f), // 速度缩放
                 VisualRotation = 0.8f, // 视觉朝向
+                OnHitStopTime = 4, // 击中停止时间
             },
             preAtk: new() // 攻击前
             {
@@ -344,12 +368,12 @@ namespace WeaponReset.Content.Weapons.OreSwords
             {
                 SwingTime = attackSpeed / 3, // 挥舞时间
                 TimeChange = swingChange, // 时间变化函数
-                OnHit = OnHitEffect,
+                OnHit = OnHitEffect + StrongPunchCamera,
                 OnChange = ResetFullRot,
                 OnUse = SetFullRot
             }, SwingHelper, Player, 1);
 
-            SwingHelper_Defence Def = new(this, // 斜下砍
+            SwingHelper_Defence Def = new(this, // 防御
             setting: new() // 设置
             {
                 SwingLenght = Projectile.Size.Length(), // 挥舞长度
@@ -451,7 +475,7 @@ namespace WeaponReset.Content.Weapons.OreSwords
             {
                 SwingTime = 10, // 挥舞时间
                 TimeChange = swingChange, // 时间变化函数
-                OnHit = OnHitEffect,
+                OnHit = OnHitEffect + StrongPunchCamera,
                 OnChange = ResetFullRot,
                 OnUse = SetFullRot + MoveSlash
 
@@ -537,7 +561,7 @@ namespace WeaponReset.Content.Weapons.OreSwords
                 StartVel = -Vector2.UnitY.RotatedBy(-0.4f),// 起始速度朝向
                 VelScale = new Vector2(2f, 2f), // 速度缩放
                 VisualRotation = 0f, // 视觉朝向
-                ActionDmg = 5.6f, // 动作值
+                ActionDmg = 11.5f, // 动作值
             },
             preAtk: new() // 攻击前
             {
@@ -560,7 +584,7 @@ namespace WeaponReset.Content.Weapons.OreSwords
             {
                 SwingTime = attackSpeed / 4, // 挥舞时间
                 TimeChange = swingChange, // 时间变化函数
-                OnHit = OnHitEffect,
+                OnHit = OnHitEffect + StrongPunchCamera,
                 OnChange = ResetFullRot,
                 OnUse = SetFullRot + MoveSlash
             }, SwingHelper, Player);
@@ -571,6 +595,8 @@ namespace WeaponReset.Content.Weapons.OreSwords
             SwingAcross.onAtk.OnChange += NoHitChange;
             SwingDown.onAtk.OnChange += NoHitChange;
             StorngSlash.onAtk.ModifyHit += LastModifyHit;
+
+            SwingUp.CanMoveScreen = SwingAcrossDown.CanMoveScreen = SwingAcross.CanMoveScreen = SwingDown.CanMoveScreen = StorngSlash.CanMoveScreen = SwingAcross2.CanMoveScreen = SwingAcross_Dash.CanMoveScreen = SwingAcross3.CanMoveScreen = StorngSlash2.CanMoveScreen = true;
             #endregion
             #region 连接技能
             SwingAcrossDown.AddSkill(SwingAcross3).AddSkill(Def2).AddSkill(StorngSlash2);

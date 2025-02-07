@@ -14,18 +14,20 @@ namespace WeaponReset.Content.Weapons.OreSwords
         public static int DefCDMax = 120;
         public override HashSet<int> ResetWeaponID => new()
         {
-            ItemID.CopperBroadsword,
-            ItemID.IronBroadsword,
-            ItemID.SilverBroadsword,
-            ItemID.GoldBroadsword,
-            ItemID.PlatinumBroadsword,
-            ItemID.LeadBroadsword,
-            ItemID.TungstenBroadsword,
-            ItemID.TinBroadsword,
-            ItemID.WoodenSword,
-            ItemID.PalmWoodSword,
-            ItemID.AshWoodSword,
-            ItemID.BorealWoodSword
+            ItemID.CopperBroadsword, // 铜剑
+            ItemID.IronBroadsword,    // 铁剑
+            ItemID.SilverBroadsword,  // 银剑
+            ItemID.GoldBroadsword,    // 金剑
+            ItemID.PlatinumBroadsword, // 铂金剑
+            ItemID.LeadBroadsword,    // 铅剑
+            ItemID.TungstenBroadsword, // 锡剑
+            ItemID.TinBroadsword,     // 锡剑
+            ItemID.WoodenSword,       // 木剑
+            ItemID.PalmWoodSword,     // 棕榈木剑
+            ItemID.AshWoodSword,      // 桦木剑
+            ItemID.BorealWoodSword,   // 冰霜木剑
+            ItemID.ShadewoodSword,    // 暗影木剑
+            ItemID.EbonwoodSword      // 黑木剑
         };
         public override void SetDefaults(Item entity)
         {
