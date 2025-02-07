@@ -624,6 +624,9 @@ namespace WeaponReset.Content.Weapons.OreSwords
             Def.AddBySkill(noUse);
             noUse.AddSkill(SwingUp).AddSkill(SwingAcrossDown).AddSkill(SwingAcross).AddSkill(SwingDown).AddSkill(StorngSlash);
             #endregion
+            #region 注册技能
+            (this as IBasicSkillProj).Register(SwingUp, SwingAcrossDown, SwingAcross, SwingDown, StorngSlash, Def, noUse, SwingAcross2, SwingAcross_Dash, SwingAcross3, Def2, StorngSlash2);
+            #endregion
             CurrentSkill = noUse;
         }
     }

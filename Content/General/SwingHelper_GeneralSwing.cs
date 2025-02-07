@@ -177,16 +177,15 @@ namespace WeaponReset.Content.General
                     }
                     onAtk.OnUse?.Invoke(this);
                     swingTime = onAtk.TimeChange.Invoke(swingTime);
-                    SyncData();
 
                     SwingHelper.SwingAI(setting.SwingLenght, Player.direction, swingTime * setting.SwingRot * setting.SwingDirectionChange.ToDirectionInt());
                     break;
                 case 2: // 超时
                     Projectile.ai[1]++;
                     Projectile.extraUpdates = 0;
-                    SyncData();
                     if (Projectile.ai[1] > postAtk.PostMaxTime)
                     {
+                        SyncData();
                         SkillTimeOut = true;
                         break;
                     }

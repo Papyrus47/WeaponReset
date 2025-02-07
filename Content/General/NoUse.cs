@@ -20,7 +20,7 @@ namespace WeaponReset.Content.General
             player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, player.velocity.X / 10f); // 设置玩家的前臂为合成状态，并设置其伸展程度为Full
             player.itemRotation = player.compositeFrontArm.rotation; // 设置玩家的手臂角度为玩家的前臂的旋转角度
 
-            if (player.velocity.X != player.oldVelocity.X)
+            if (player.velocity.X != player.oldVelocity.X && Main.myPlayer == Projectile.owner)
                 Projectile.netUpdate = true;
 
             player.heldProj = Projectile.whoAmI;

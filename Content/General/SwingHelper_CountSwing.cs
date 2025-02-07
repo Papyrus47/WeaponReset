@@ -47,7 +47,6 @@ namespace WeaponReset.Content.General
                     else
                         OnHitStopTime--;
                     float swingTime = Projectile.ai[1] / (onAtk.SwingTime * (Projectile.extraUpdates + 1));
-                    SyncData();
                     if (swingTime > 1)
                     {
                         Projectile.ai[1] = 0;
@@ -59,6 +58,7 @@ namespace WeaponReset.Content.General
                             SwingHelper.SetNotSaveOldVel();
                             TheUtility.ResetProjHit(Projectile);
                         }
+                        SyncData();
                         onAtk.OnChange?.Invoke(this);
                         break;
                     }

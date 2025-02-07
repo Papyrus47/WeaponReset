@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Iced.Intel;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -7,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria.DataStructures;
 using Terraria.GameContent;
+using Terraria.ModLoader.IO;
 using WeaponReset.Command;
 
 namespace WeaponReset.Content.Weapons
@@ -26,27 +29,7 @@ namespace WeaponReset.Content.Weapons
             }
             set
             {
-                if (!IDParis.ContainsKey(value))
-                {
-                    string name = value.GetType().Name;
-                    int i = 0;
-                    while (true)
-                    {
-                        i++;
-                        if (!SkillsParis.ContainsKey(name))
-                        {
-                            name += i.ToString();
-                            if (IDParis.ContainsValue(name))
-                            {
-                                name += (i++).ToString();
-                                continue;
-                            }
-                            break;
-                        }
-                    }
-                    IDParis.Add(value, name);
-                    SkillsParis.Add(name, value);
-                }
+                (this as IBasicSkillProj).Register(value);
                 ID = IDParis[value];
             }
         }
@@ -101,13 +84,15 @@ namespace WeaponReset.Content.Weapons
         {
             (this as IBasicSkillProj).SendData(writer);
             SwingHelper?.SendData(writer);
-            writer.Write(Player.controlUseTile);
+            //writer.Write(Player.whoAmI);
+            //writer.Write(Player.controlUseTile);
         }
         public override void ReceiveExtraAI(BinaryReader reader)
         {
             (this as IBasicSkillProj).ReceiveData(reader);
             SwingHelper?.RendData(reader);
-            Player.controlUseTile = reader.ReadBoolean();
+            //Player = Main.player[reader.ReadInt32()];
+            //Player.controlUseTile = reader.ReadBoolean();
         }
         #endregion
         public override bool ShouldUpdatePosition() => false;
