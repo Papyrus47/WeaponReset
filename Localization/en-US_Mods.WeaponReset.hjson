@@ -13,3 +13,5 @@ Configs: {
 		}
 	}
 }
+
+Keybinds.UseResetBind.DisplayName: Use Reset Bind

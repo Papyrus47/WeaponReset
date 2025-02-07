@@ -8,6 +8,9 @@
 		
 	</PropertyGroup>
 	<ItemGroup>
+	  <None Remove="Localization\zh-Hans_Mods.WeaponReset.hjson" />
+	</ItemGroup>
+	<ItemGroup>
 	  <Folder Include="Content\Items\" />
 	</ItemGroup>
 

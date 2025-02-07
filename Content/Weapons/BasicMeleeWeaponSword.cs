@@ -70,7 +70,7 @@ namespace WeaponReset.Content.Weapons
                 SpawnItem = itemUse.Item;
                 Player = itemUse.Player;
                 Projectile.Name = SpawnItem.Name;
-                SwingHelper = new(Projectile, 16, TextureAssets.Item[SpawnItem.type]);
+                SwingHelper = new(Projectile, 64, TextureAssets.Item[SpawnItem.type]);
                 Projectile.scale = Player.GetAdjustedItemScale(SpawnItem);
                 Projectile.Size = SpawnItem.Size * Projectile.scale;
                 SwingHelper.DrawTrailCount = 3; // 绘制拖尾的次数
@@ -84,7 +84,7 @@ namespace WeaponReset.Content.Weapons
 
         public override void AI()
         {
-            if (Player == null|| Player.HeldItem != SpawnItem || Player.dead) // 玩家手上物品不是生成物品,则清除
+            if (Player == null|| Player.HeldItem != SpawnItem || Player.dead || !BasicWeaponsItems.CanResetWeapon) // 玩家手上物品不是生成物品,则清除
             {
                 Projectile.Kill();
                 return;

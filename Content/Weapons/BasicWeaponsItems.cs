@@ -9,6 +9,7 @@ namespace WeaponReset.Content.Weapons
 {
     public abstract class BasicWeaponsItems : GlobalItem
     {
+        public static bool CanResetWeapon = true;
         public abstract HashSet<int> ResetWeaponID { get; }
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {

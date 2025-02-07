@@ -402,7 +402,7 @@ namespace WeaponReset.Command
 
             for (int j = 0; j < DrawTrailCount; j++) // 重复绘制拖尾的次数
             {
-                for (int i = length - 1; i >= 0; i--)
+                for (int i = 0; i < length; i++)
                 {
                     Vector2 vel = GetOldVel(i, true);
                     if (vel == default)

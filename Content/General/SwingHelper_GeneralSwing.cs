@@ -20,7 +20,7 @@ namespace WeaponReset.Content.General
             /// <summary>
             /// 开始时候调用
             /// </summary>
-            public Action<SwingHelper_GeneralSwing> OnStart;
+            public Action<SwingHelper_GeneralSwing> OnUse;
             /// <summary>
             /// 在改变时候
             /// </summary>
@@ -144,7 +144,7 @@ namespace WeaponReset.Content.General
                     SwingHelper.Change_Lerp(setting.StartVel, time, setting.VelScale, time * 2, setting.VisualRotation, time);
                     SwingHelper.ProjFixedPlayerCenter(Player, 0, true);
                     SwingHelper.SwingAI(setting.SwingLenght, Player.direction, 0);
-                    preAtk.OnStart?.Invoke(this);
+                    preAtk.OnUse?.Invoke(this);
                     if (time > 1)
                     {
                         Projectile.ai[1] = 0;
@@ -204,6 +204,8 @@ namespace WeaponReset.Content.General
             Projectile.originalDamage = Player.GetWeaponDamage(Player.HeldItem);
             Projectile.damage = Projectile.originalDamage;
             TheUtility.ResetProjHit(Projectile);
+            Projectile.netUpdate = true;
+            Projectile.numHits = 0;
         }
         public override void OnSkillDeactivate()
         {
@@ -214,6 +216,7 @@ namespace WeaponReset.Content.General
             Projectile.hide = false;
             SwingHelper.SetRotVel(0);
             Projectile.netUpdate = true;
+            Projectile.numHits = 0;
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox) => SwingHelper.GetColliding(targetHitbox);
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)

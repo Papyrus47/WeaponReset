@@ -1,0 +1,17 @@
+Projectiles: {
+	// OreSwordProj.DisplayName: Ore Sword Proj
+	// SwordQi.DisplayName: Sword Qi
+}
+
+Configs: {
+	Setting: {
+		DisplayName: 设置
+
+		SettingNoResetWeapon: {
+			Label: 设置不重置的武器
+			// Tooltip: ""
+		}
+	}
+}
+
+// Keybinds.UseResetBind.DisplayName: Use Reset Bind

@@ -28,7 +28,7 @@ namespace WeaponReset.Content.General
                     SwingHelper.Change_Lerp(setting.StartVel, time, setting.VelScale, time * 2, setting.VisualRotation, time);
                     SwingHelper.ProjFixedPlayerCenter(Player, 0, true);
                     SwingHelper.SwingAI(setting.SwingLenght, Player.direction, 0);
-                    preAtk.OnStart?.Invoke(this);
+                    preAtk.OnUse?.Invoke(this);
                     if (time > 1)
                     {
                         Projectile.ai[1] = 0;
@@ -52,6 +52,7 @@ namespace WeaponReset.Content.General
                             Projectile.ai[0]++; // 切换状态
                         else
                         {
+                            SoundEngine.PlaySound(playSound, Player.position);
                             SwingHelper.SetNotSaveOldVel();
                             TheUtility.ResetProjHit(Projectile);
                         }
