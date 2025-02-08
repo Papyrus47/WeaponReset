@@ -1,6 +1,7 @@
 Projectiles: {
 	OreSwordProj.DisplayName: Ore Sword Proj
 	SwordQi.DisplayName: Sword Qi
+	SPAtkSwordProj.DisplayName: S P Atk Sword Proj
 }
 
 Configs: {
@@ -24,11 +25,21 @@ Content: {
 			NoShiftText: Attack switching with {0}, hold Shift to show details.
 			ShiftText:
 				'''
-				<left> + <left> + <left> + <left> + <left>(Can hold) for a basis attack.
+				<left>-><left>-><left>-><left>-><left>(Can hold) for a basis attack.
 				<right> for a block attack (The first half block will block all damage).
-				<left> + <right> + <left> for a movement attack(The first half move will immune damage).
-				<left> + <left> + <right> + <left> + <right> for a powerful attack(The first half move will immune damage).
+				<left>-><right>-><left> for a movement attack(The first half move will immune damage).
+				<left>-><left>-><right>-><left>-><right> for a powerful attack(The first half move will immune damage).
 				'''
+		}
+
+		SPAtkSwords: {
+			NoShiftText: "{$Mods.WeaponReset.Content.Weapons.OreSwords.NoShiftText}"
+			ShiftText: 
+			'''
+			<left>-><left>-><left>-><left>-><left>(Can hold) for a basis attack.
+			<right> for charged wepaon.
+			<left>-><right> for a block attack (The first half block will block all damage).
+			'''
 		}
 	}
 }

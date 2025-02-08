@@ -8,6 +8,7 @@ using Terraria;
 using Terraria.GameInput;
 using WeaponReset.Content.Weapons;
 using WeaponReset.Content.Weapons.OreSwords;
+using WeaponReset.Content.Weapons.SPAtkSwords;
 
 namespace WeaponReset
 {
@@ -88,8 +89,9 @@ namespace WeaponReset
             if (WeaponReset.UseResetBind.JustPressed) // 按下
             {
                 OreSwordItems.CanResetWeapon = !OreSwordItems.CanResetWeapon;
+                SPAtkSwordItems.CanResetWeapon = !SPAtkSwordItems.CanResetWeapon;
 
-                foreach(Item item in Player.inventory)
+                foreach (Item item in Player.inventory)
                 {
                     int prefix = item.prefix;
                     int count = item.stack;

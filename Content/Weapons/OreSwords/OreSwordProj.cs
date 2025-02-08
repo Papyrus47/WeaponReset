@@ -198,7 +198,7 @@ namespace WeaponReset.Content.Weapons.OreSwords
         {
             OldSkills = new();
 
-            NoUse noUse = new(Player, SwingHelper, this)
+            SwingHelper_NoUse noUse = new(Player, SwingHelper, this)
             {
                 Length = Projectile.Size.Length()
             }; // 玩家拿在手上不使用的时候
@@ -330,7 +330,7 @@ namespace WeaponReset.Content.Weapons.OreSwords
                 SwingDirectionChange = true, // 挥舞方向变化
                 StartVel = -Vector2.UnitY.RotatedBy(-0.4f),// 起始速度朝向
                 VelScale = new Vector2(1, 0.6f), // 速度缩放
-                VisualRotation = 0.4f, // 视觉朝向
+                VisualRotation = -0.4f, // 视觉朝向
             },
             preAtk: new() // 攻击前
             {
@@ -361,7 +361,7 @@ namespace WeaponReset.Content.Weapons.OreSwords
                 SwingDirectionChange = false, // 挥舞方向变化
                 StartVel = Vector2.UnitY.RotatedBy(0.4f),// 起始速度朝向
                 VelScale = new Vector2(1.3f, 0.3f), // 速度缩放
-                VisualRotation = 0.7f, // 视觉朝向
+                VisualRotation = -0.7f, // 视觉朝向
             },
             preAtk: new() // 攻击前
             {
@@ -499,7 +499,7 @@ namespace WeaponReset.Content.Weapons.OreSwords
                 SwingDirectionChange = true, // 挥舞方向变化
                 StartVel = -Vector2.UnitY.RotatedBy(-0.4f),// 起始速度朝向
                 VelScale = new Vector2(1.8f, 0.3f), // 速度缩放
-                VisualRotation = 0.7f, // 视觉朝向
+                VisualRotation = -0.7f, // 视觉朝向
                 ActionDmg = 1.5f, // 动作值
             },
             preAtk: new() // 攻击前
@@ -531,7 +531,7 @@ namespace WeaponReset.Content.Weapons.OreSwords
                 SwingDirectionChange = false, // 挥舞方向变化
                 StartVel = Vector2.UnitY.RotatedBy(0.4f),// 起始速度朝向
                 VelScale = new Vector2(1.8f, 0.3f), // 速度缩放
-                VisualRotation = 0.7f, // 视觉朝向
+                VisualRotation = -0.7f, // 视觉朝向
                 ActionDmg = 2.5f, // 动作值
             },
             preAtk: new() // 攻击前
@@ -570,7 +570,7 @@ namespace WeaponReset.Content.Weapons.OreSwords
                 SwingDirectionChange = true, // 挥舞方向变化
                 StartVel = -Vector2.UnitY.RotatedBy(-0.4f),// 起始速度朝向
                 VelScale = new Vector2(1.8f, 0.3f), // 速度缩放
-                VisualRotation = 0.7f, // 视觉朝向
+                VisualRotation = -0.7f, // 视觉朝向
                 ActionDmg = 3.5f, // 动作值
             },
             preAtk: new() // 攻击前

@@ -1,4 +1,4 @@
 displayName = 原版武器重置 Weapon reset
 author = Papyru
-version = 0.1.0.0
+version = 0.1.0.1
 modReferences = InnoVault@1.5

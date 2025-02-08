@@ -37,6 +37,7 @@ namespace WeaponReset.Command
         public bool _changeLerpInvoke;
         public bool _canDrawTrailing;
         public bool _drawCorrections;
+        public bool _oldVelsSaveClean;
         public bool _oldVelsSave;
         public float _halfSizeLength;
         public float _velLerp;
@@ -57,7 +58,7 @@ namespace WeaponReset.Command
             SpawnEntity = spawnEntity;
             _halfSizeLength = 0;
             oldVels = new Vector2[oldVelLength];
-            _oldVelsSave = true;
+            _oldVelsSaveClean = true;
             SwingItemTex = swingItemTex;
         }
         public virtual void SendData(BinaryWriter writer)
@@ -146,9 +147,11 @@ namespace WeaponReset.Command
             {
                 if (_acitveSwing && !_changeLerpInvoke)
                 {
+                    if (!_oldVelsSave) // 不保存旧速度
+                        continue;
                     if (i == 0)
                     {
-                        oldVels[0] = _oldVelsSave ? velocity : default;
+                        oldVels[0] = _oldVelsSaveClean ? velocity : default;
                         oldFrames[0] = frame;
                     }
                     else
@@ -166,6 +169,7 @@ namespace WeaponReset.Command
             #endregion
 
             if (projectile != null) projectile.timeLeft = 2;
+            _oldVelsSaveClean = true;
             _oldVelsSave = true;
             _acitveSwing = _changeLerpInvoke = false;
 
@@ -210,9 +214,15 @@ namespace WeaponReset.Command
         }
         public virtual void SetSwingActive() => _acitveSwing = true;
         /// <summary>
-        /// 使用这个函数会使拖尾不保存现有的速度
+        /// 使用这个函数会使拖尾不保存现有的速度,并使全部设置为default状态以备下一次
         /// </summary>
-        public virtual void SetNotSaveOldVel() => _oldVelsSave = false;
+        public virtual void SetNotSaveOldVel(bool clean = true)
+        {
+            if (clean)
+                _oldVelsSaveClean = false;
+            else
+                _oldVelsSave = false;
+        }
         #region 绘制 
         /// <summary>
         /// 绘制剑与拖尾
@@ -514,7 +524,7 @@ namespace WeaponReset.Command
                 _canDrawTrailing = _canDrawTrailing,
                 _changeHeldLength = _changeHeldLength,
                 _halfSizeLength = _halfSizeLength,
-                _oldVelsSave = _oldVelsSave,
+                _oldVelsSaveClean = _oldVelsSaveClean,
                 _velLerp = _velLerp,
                 _velRotBy = _velRotBy,
                 _drawCorrections = _drawCorrections,

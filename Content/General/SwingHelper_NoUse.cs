@@ -2,12 +2,12 @@
 
 namespace WeaponReset.Content.General
 {
-    public class NoUse : ProjSkill_Instantiation
+    public class SwingHelper_NoUse : ProjSkill_Instantiation
     {
         public Player player;
         public SwingHelper swingHelper;
         public float Length = 30;
-        public NoUse(Player player, SwingHelper swingHelper, ModProjectile proj) : base(proj)
+        public SwingHelper_NoUse(Player player, SwingHelper swingHelper, ModProjectile proj) : base(proj)
         {
             this.player = player;
             this.swingHelper = swingHelper;
