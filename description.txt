@@ -1,1 +1,9 @@
-Modify this file with a description of your mod.
+Weapon reset Mod:
+Reset many weapon.
+Distinguished from Weapon Skill, it does not add new weapon types, has a broader scope of changes, and supports multiplayer online.
+Only add more weapon.
+
+原版武器重置:
+重置绝大多数原版的武器。
+与Weapon Skill有区别的是，不添加新的武器种类，更改范围更广，支持多人联机。
+只添加更多武器。

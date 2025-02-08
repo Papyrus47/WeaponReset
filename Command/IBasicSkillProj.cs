@@ -23,24 +23,20 @@ namespace WeaponReset.Command
         {
             if (!IDParis.ContainsKey(value))
             {
-                string name = value.GetType().Name;
                 int i = 0;
                 while (true)
                 {
                     i++;
-                    if (!SkillsParis.ContainsKey(name))
+                    if (!SkillsParis.ContainsKey(i))
                     {
-                        name += i.ToString();
-                        if (IDParis.ContainsValue(name))
-                        {
-                            name += "_" + IDParis.Count.ToString();
+                        if (IDParis.ContainsValue(i))
                             continue;
-                        }
+                        
+                        IDParis.Add(value, i);
+                        SkillsParis.Add(i, value);
                         break;
                     }
                 }
-                IDParis.Add(value, name);
-                SkillsParis.Add(name, value);
             }
         }
         public void Register(params ProjSkill_Instantiation[] value)
@@ -66,16 +62,16 @@ namespace WeaponReset.Command
                 //}
             }
         }
-        public string ID { get; set; }
-        public Dictionary<ProjSkill_Instantiation, string> IDParis { get; set; }
-        public Dictionary<string, ProjSkill_Instantiation> SkillsParis { get; set; }
+        public int ID { get; set; }
+        public Dictionary<ProjSkill_Instantiation, int> IDParis { get; set; }
+        public Dictionary<int, ProjSkill_Instantiation> SkillsParis { get; set; }
         public void SendData(BinaryWriter binaryWriter)
         {
             binaryWriter.Write(ID);
         }
         public void ReceiveData(BinaryReader binaryReader)
         {
-            ID = binaryReader.ReadString();
+            ID = binaryReader.ReadInt32();
         }
         public void Init();
         public void SwitchSkill()

@@ -97,9 +97,38 @@ namespace WeaponReset.Content.Weapons.OreSwords
                     return new Color(34,23,60) with { A = 0 };
                 case ItemID_Chinese.附魔剑:
                     return Color.DeepSkyBlue with { A = 0 } * factor;
+                case ItemID_Chinese.精金剑:
+                    return Color.IndianRed with { A = 0 } * factor;
+                case ItemID_Chinese.山铜剑:
+                    return Color.DeepPink with { A = 0 } * factor;
+                case ItemID_Chinese.秘银剑:
+                    return Color.DarkGreen with { A = 0 } * factor;
+                case ItemID_Chinese.钴剑:
+                    return Color.DodgerBlue with { A = 0 } * factor;
+                case ItemID_Chinese.钯金剑:
+                    return Color.OrangeRed with { A = 0 } * factor;
+                case ItemID_Chinese.光束剑:
+                    return Color.White with { A = 0 } * factor;
+                case ItemID_Chinese.钛金剑:
+                    return Color.Silver with { A = 0 } * factor;
+                case ItemID_Chinese.霜印剑:
+                    return Color.LightSkyBlue with { A = 0 } * factor;
+                case ItemID_Chinese.舌锋剑:
+                    return Color.IndianRed with { A = 0 } * factor;
+                case ItemID_Chinese.火腿棍:
+                    return Color.DarkOrange with { A = 0 } * factor;
 
             }
             return default;
+        }
+        public override void AI()
+        {
+            if(!OreSwordItems.CanResetWeapon)
+            {
+                Projectile.Kill();
+                return;
+            }
+            base.AI();
         }
         public override void ModifyHitNPC(NPC target, ref NPC.HitModifiers modifiers)
         {
@@ -115,8 +144,15 @@ namespace WeaponReset.Content.Weapons.OreSwords
         /// </summary>
         public virtual void OnAtk(SwingHelper_GeneralSwing swingHelper_GeneralSwing)
         {
-            if ((int)Projectile.ai[1] == (int)swingHelper_GeneralSwing.onAtk.SwingTime / 2 * (Projectile.extraUpdates + 1) && Main.myPlayer == Player.whoAmI)
+            if ((int)Projectile.ai[1] == (int)(swingHelper_GeneralSwing.onAtk.SwingTime / 4 * 3.9f) * (Projectile.extraUpdates + 1) && Main.myPlayer == Player.whoAmI)
+            {
                 TheUtility.Player_ItemCheck_Shoot(Player, SpawnItem, Projectile.damage);
+                // 特判环节 : 剑气
+                if (OreSwordItems.ShootSwordQiID.Contains(SpawnItem.type))
+                {
+                    Projectile.NewProjectile(new SwordQi.SwordQiSource(SwingHelper.Clone() as SwingHelper, GetColor), Projectile.Center, (Main.MouseWorld - Projectile.Center).SafeNormalize(default) * 10f, ModContent.ProjectileType<SwordQi>(), Projectile.damage, Projectile.knockBack, Projectile.owner);
+                }
+            }
         }
         public virtual void LastModifyHit(NPC target, ref NPC.HitModifiers hitModifiers)
         {
@@ -211,7 +247,7 @@ namespace WeaponReset.Content.Weapons.OreSwords
                 Main.instance.CameraModifiers.Add(new PunchCameraModifier(Projectile.Center, Projectile.velocity.SafeNormalize(default).RotatedByRandom(0.7), 7f, 15f, 15));
             };
 
-            float attackSpeed = Player.GetWeaponAttackSpeed(SpawnItem) * SpawnItem.useTime;
+            float attackSpeed = Player.GetWeaponAttackSpeed(SpawnItem) * (SpawnItem.useTime + SpawnItem.useAnimation) / 2;
 
             ChangeToRot = (_) => // 改变玩家朝向与剑朝向的旋转
             {
@@ -255,7 +291,7 @@ namespace WeaponReset.Content.Weapons.OreSwords
                 SwingRot = MathHelper.Pi + MathHelper.PiOver2, // 挥舞角度
                 preDraw = DrawProj,
                 SwingDirectionChange = false, // 挥舞方向变化
-                StartVel = Vector2.UnitY.RotatedBy(-0.4f),// 起始速度朝向
+                StartVel = Vector2.UnitY.RotatedBy(MathHelper.PiOver2),// 起始速度朝向
                 VelScale = new Vector2(1, 1), // 速度缩放
                 VisualRotation = 0, // 视觉朝向
             },
@@ -642,6 +678,7 @@ namespace WeaponReset.Content.Weapons.OreSwords
             SwingAcrossDown.onAtk.OnUse += OnAtk;
             SwingAcross.onAtk.OnUse += OnAtk;
             SwingDown.onAtk.OnUse += OnAtk;
+            StorngSlash.onAtk.OnUse += OnAtk;
 
             SwingUp.CanMoveScreen = SwingAcrossDown.CanMoveScreen = SwingAcross.CanMoveScreen = SwingDown.CanMoveScreen = StorngSlash.CanMoveScreen = SwingAcross2.CanMoveScreen = SwingAcross_Dash.CanMoveScreen = SwingAcross3.CanMoveScreen = StorngSlash2.CanMoveScreen = true;
             #endregion

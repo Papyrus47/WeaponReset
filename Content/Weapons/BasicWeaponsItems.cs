@@ -7,10 +7,10 @@ using WeaponReset.Command.Configs;
 
 namespace WeaponReset.Content.Weapons
 {
-    public abstract class BasicWeaponsItems : GlobalItem
+    public abstract class BasicWeaponsItems<T> : GlobalItem where T : BasicWeaponsItems<T>
     {
         public static bool CanResetWeapon = true;
-        public abstract HashSet<int> ResetWeaponID { get; }
+        public static HashSet<int> ResetWeaponID;
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {

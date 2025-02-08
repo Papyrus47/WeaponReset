@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameInput;
 using WeaponReset.Content.Weapons;
+using WeaponReset.Content.Weapons.OreSwords;
 
 namespace WeaponReset
 {
@@ -49,8 +51,14 @@ namespace WeaponReset
             }
             if (OreSwordDef > 0)
             {
-                Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.Smoke, Main.rand.NextFloatDirection(), -2, 0, Color.White, 0.5f);
-                OreSwordDef--;
+                if (Main.netMode != NetmodeID.Server)
+                {
+                    Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.Smoke, Main.rand.NextFloatDirection(), -2, 0, Color.White, 0.5f);
+                    if(--OreSwordDef <= 0)
+                    {
+                        NetMessage.SyncDisconnectedPlayer(Player.whoAmI);
+                    }
+                }
             }
         }
         public override bool ConsumableDodge(Player.HurtInfo info)
@@ -74,7 +82,7 @@ namespace WeaponReset
         {
             if (WeaponReset.UseResetBind.JustPressed) // 按下
             {
-                BasicWeaponsItems.CanResetWeapon = !BasicWeaponsItems.CanResetWeapon;
+                OreSwordItems.CanResetWeapon = !OreSwordItems.CanResetWeapon;
 
                 foreach(Item item in Player.inventory)
                 {
@@ -111,5 +119,24 @@ namespace WeaponReset
                 playerFallSpeed = -1;
             }
         }
+        #region 联机同步
+        public override void SyncPlayer(int toWho, int fromWho, bool newPlayer)
+        {
+            ModPacket packet = Mod.GetPacket();
+            packet.Write((byte)WeaponReset.NetUpdateWho.Player);
+            packet.Write((byte)WeaponReset.NetUpdatePlayer.ResetEffect);
+            packet.Write(Player.whoAmI);
+            packet.Write(PlayerImmune);
+            packet.Write(PlayerImmuneHit);
+            packet.Write(OreSwordDef);
+            packet.Send(toWho, fromWho);
+        }
+        public virtual void NetResetEffect(BinaryReader reader)
+        {
+            PlayerImmune = reader.ReadInt32();
+            PlayerImmuneHit = reader.ReadBoolean();
+            OreSwordDef = reader.ReadInt32();
+        }
+        #endregion
     }
 }

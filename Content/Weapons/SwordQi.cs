@@ -17,6 +17,7 @@ namespace WeaponReset.Content.Weapons
             public SwordQiSource(SwingHelper swingHelper, Func<float, Color> colorFunc, Draw draw = null, string context = null)
             {
                 this.swingHelper = swingHelper;
+                swingHelper.DrawTrailCount = 6;
                 Context = context;
                 Draw = draw;
                 this.colorFunc = colorFunc;
@@ -26,6 +27,61 @@ namespace WeaponReset.Content.Weapons
         public delegate void Draw(SpriteBatch sb);
         public Draw draw;
         public Func<float, Color> colorFunc;
+        //public DrawCecheSystem cecheSystem = new();
+        //#region 绘制缓存系统
+        //public class SwordQiDrawCeche : DrawCecheSystem.Ceche
+        //{
+        //    public SwingHelper SwingHelper;
+        //    public int Time;
+        //    public SwordQi swordQi;
+        //    public SwordQiDrawCeche(SwingHelper swingHelper, SwordQi swordQi)
+        //    {
+        //        SwingHelper = swingHelper;
+        //        Time = 2;
+        //        this.swordQi = swordQi;
+        //    }
+        //    public override void UpdateCeche()
+        //    {
+        //        Vector2[] oldVels = SwingHelper.oldVels; // 获得旧速度
+        //        //#region 保存旧速度
+        //        //for (int i = oldVels.Length - 1; i > 0; i--)
+        //        //{
+        //        //    oldVels[i] = oldVels[i - 1];
+        //        //}
+        //        //#endregion
+        //        if (Time-- < 0) // 时间到,移除
+        //            Remove = true;
+        //    }
+        //    public override void DrawCeche()
+        //    {
+        //        SwingHelper.Swing_TrailingDraw(TextureAssets.Extra[201].Value, (_) => swordQi.colorFunc.Invoke(0.5f) * (1f - (swordQi.Projectile.alpha / 255f)), null);
+        //    }
+        //}
+        //public override void PostAI()
+        //{
+        //    for (int i = 0; i < cecheSystem.CecheList.Count; i++)
+        //    {
+        //        cecheSystem.CecheList[i].UpdateCeche();
+        //        if (cecheSystem.CecheList[i].Remove)
+        //        {
+        //            cecheSystem.CecheList.RemoveAt(i);
+        //            i--;
+        //        }
+        //    }
+        //}
+        //public override void PostDraw(Color lightColor)
+        //{
+        //    for (int i = 0; i < cecheSystem.CecheList.Count; i++)
+        //    {
+        //        cecheSystem.CecheList[i].DrawCeche();
+        //        if (cecheSystem.CecheList[i].Remove)
+        //        {
+        //            i--;
+        //            cecheSystem.CecheList.RemoveAt(i);
+        //        }
+        //    }
+        //}
+        //#endregion
         public override void SetDefaults()
         {
             Projectile.ownerHitCheck = true; // 弹幕检查是否隔墙
@@ -79,6 +135,15 @@ namespace WeaponReset.Content.Weapons
                 else
                     Projectile.Kill();
             }
+            //cecheSystem.CecheList.Add(new SwordQiDrawCeche(swingHelper.Clone() as SwingHelper, this));
+            //if (Projectile.timeLeft % 2 == 0)
+            //{
+            //    for (int j = 0; j < swingHelper.oldVels.Length; j++)
+            //    {
+            //        var dust = Dust.NewDustPerfect(Projectile.Center + swingHelper.oldVels[j], DustID.Smoke, Vector2.Zero, 0, colorFunc.Invoke(1f), 1f);
+            //        dust.noGravity = true;
+            //    }
+            //}
         }
         public override bool? Colliding(Rectangle projHitbox, Rectangle targetHitbox)
         {

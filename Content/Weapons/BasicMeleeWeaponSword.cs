@@ -33,9 +33,10 @@ namespace WeaponReset.Content.Weapons
                 ID = IDParis[value];
             }
         }
-        public string ID { get; set; }
-        public Dictionary<ProjSkill_Instantiation, string> IDParis { get; set; }
-        public Dictionary<string, ProjSkill_Instantiation> SkillsParis { get; set; }
+
+        public int ID{ get; set; }
+        public Dictionary<ProjSkill_Instantiation, int> IDParis { get; set; }
+        public Dictionary<int, ProjSkill_Instantiation> SkillsParis { get; set; }
 
         public override void SetDefaults()
         {
@@ -68,7 +69,7 @@ namespace WeaponReset.Content.Weapons
 
         public override void AI()
         {
-            if (Player == null|| Player.HeldItem != SpawnItem || Player.dead || !BasicWeaponsItems.CanResetWeapon) // 玩家手上物品不是生成物品,则清除
+            if (Player == null|| Player.HeldItem != SpawnItem || Player.dead) // 玩家手上物品不是生成物品,则清除
             {
                 Projectile.Kill();
                 return;

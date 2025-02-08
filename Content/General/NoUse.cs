@@ -17,6 +17,7 @@ namespace WeaponReset.Content.General
             //Projectile.localAI[0] += player.velocity.X / 10;
             //Projectile.localAI[0] %= 6.28f;
             //float rotation = Projectile.localAI[0] % (MathHelper.PiOver4 * 2) - MathHelper.PiOver4;
+            SkillTimeOut = false;
             player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, player.velocity.X / 10f); // 设置玩家的前臂为合成状态，并设置其伸展程度为Full
             player.itemRotation = player.compositeFrontArm.rotation; // 设置玩家的手臂角度为玩家的前臂的旋转角度
 
@@ -32,6 +33,11 @@ namespace WeaponReset.Content.General
             player.fullRotation = player.velocity.X * 0.05f;
             //player.legRotation = -player.fullRotation;
             swingHelper.SwingAI(Length, player.direction, player.velocity.X / 10f * player.direction - MathHelper.PiOver2);
+        }
+        public override void OnSkillActive()
+        {
+            base.OnSkillActive();
+            SkillTimeOut = false;
         }
         public override bool ActivationCondition() => true; // 无条件激活
         public override bool SwitchCondition() => true; // 无条件切换
