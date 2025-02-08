@@ -49,6 +49,7 @@ namespace WeaponReset
         {
             if(!Main.dedServ)
             {
+                Main.mapEnabled = true; // ¿ªÆôµØÍ¼
                 UseResetBind = KeybindLoader.RegisterKeybind(this, nameof(UseResetBind), Microsoft.Xna.Framework.Input.Keys.F);
             }
         }

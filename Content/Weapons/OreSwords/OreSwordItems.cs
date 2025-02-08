@@ -81,6 +81,7 @@ namespace WeaponReset.Content.Weapons.OreSwords
                 ItemID_Chinese.霜印剑,
                 ItemID_Chinese.舌锋剑,
                 ItemID_Chinese.火腿棍,
+                ItemID_Chinese.毁灭刃
             });
         }
         public override void SetDefaults(Item entity)

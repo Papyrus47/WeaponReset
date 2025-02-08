@@ -110,6 +110,7 @@ namespace WeaponReset.Content.Weapons.OreSwords
                 case ItemID_Chinese.光束剑:
                     return Color.White with { A = 0 } * factor;
                 case ItemID_Chinese.钛金剑:
+                case ItemID_Chinese.毁灭刃:
                     return Color.Silver with { A = 0 } * factor;
                 case ItemID_Chinese.霜印剑:
                     return Color.LightSkyBlue with { A = 0 } * factor;
