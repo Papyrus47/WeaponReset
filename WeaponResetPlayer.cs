@@ -54,10 +54,15 @@ namespace WeaponReset
                 if (Main.netMode != NetmodeID.Server)
                 {
                     Dust.NewDustDirect(Player.position, Player.width, Player.height, DustID.Smoke, Main.rand.NextFloatDirection(), -2, 0, Color.White, 0.5f);
-                    if(--OreSwordDef <= 0)
-                    {
-                        NetMessage.SyncDisconnectedPlayer(Player.whoAmI);
-                    }
+                    --OreSwordDef;
+                    //if( <= 0)
+                    //{
+                    //    NetMessage.SyncDisconnectedPlayer(Player.whoAmI);
+                    //}
+                }
+                if(OreSwordDef <= 0 && Main.netMode == NetmodeID.Server)
+                {
+                    NetMessage.SyncDisconnectedPlayer(Player.whoAmI);
                 }
             }
         }

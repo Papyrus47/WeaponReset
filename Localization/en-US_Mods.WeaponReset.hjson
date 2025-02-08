@@ -15,3 +15,20 @@ Configs: {
 }
 
 Keybinds.UseResetBind.DisplayName: Use Reset Bind
+Left: Left click
+Right: Right click
+
+Content: {
+	Weapons: {
+		OreSwords: {
+			NoShiftText: Attack switching with {0}, hold Shift to show details.
+			ShiftText:
+				'''
+				<left> + <left> + <left> + <left> + <left>(Can hold) for a basis attack.
+				<right> for a block attack (The first half block will block all damage).
+				<left> + <right> + <left> for a movement attack(The first half move will immune damage).
+				<left> + <left> + <right> + <left> + <right> for a powerful attack(The first half move will immune damage).
+				'''
+		}
+	}
+}

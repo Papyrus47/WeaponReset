@@ -1,9 +1,9 @@
-Weapon reset Mod:
+ï»¿Weapon reset Mod:
 Reset many weapon.
 Distinguished from Weapon Skill, it does not add new weapon types, has a broader scope of changes, and supports multiplayer online.
 Only add more weapon.
 
-Ô­°æÎäÆ÷ÖØÖÃ:
-ÖØÖÃ¾ø´ó¶àÊıÔ­°æµÄÎäÆ÷¡£
-ÓëWeapon SkillÓĞÇø±ğµÄÊÇ£¬²»Ìí¼ÓĞÂµÄÎäÆ÷ÖÖÀà£¬¸ü¸Ä·¶Î§¸ü¹ã£¬Ö§³Ö¶àÈËÁª»ú¡£
-Ö»Ìí¼Ó¸ü¶àÎäÆ÷¡£
+åŸç‰ˆæ­¦å™¨é‡ç½®:
+é‡ç½®ç»å¤§å¤šæ•°åŸç‰ˆçš„æ­¦å™¨ã€‚
+ä¸Weapon Skillæœ‰åŒºåˆ«çš„æ˜¯ï¼Œä¸æ·»åŠ æ–°çš„æ­¦å™¨ç§ç±»ï¼Œæ›´æ”¹èŒƒå›´æ›´å¹¿ï¼Œæ”¯æŒå¤šäººè”æœºã€‚
+åªæ·»åŠ æ›´å¤šæ­¦å™¨ã€‚

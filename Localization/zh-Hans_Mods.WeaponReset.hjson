@@ -1,6 +1,6 @@
 Projectiles: {
 	// OreSwordProj.DisplayName: Ore Sword Proj
-	// SwordQi.DisplayName: Sword Qi
+	SwordQi.DisplayName: 剑气
 }
 
 Configs: {
@@ -14,4 +14,21 @@ Configs: {
 	}
 }
 
-// Keybinds.UseResetBind.DisplayName: Use Reset Bind
+Keybinds.UseResetBind.DisplayName: 切换武器使用方法按键
+Left: 左键点击
+Right: 右键点击
+
+Content: {
+	Weapons: {
+		OreSwords: {
+			NoShiftText: 攻击切换使用{0}键, 按住shift显示更多消息
+			ShiftText:
+				'''
+				<left> + <left> + <left> + <left> + <left>(可蓄力)进行基础攻击。
+				<right>进行格挡攻击（前半段防御格挡所有伤害）。
+				<left> + <right> + <left>进行位移攻击（前半段位移无敌）。
+				<left> + <left> + <right> + <left> + <right>进行强力攻击（前半段位移无敌）。
+				'''
+		}
+	}
+}

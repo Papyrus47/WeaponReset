@@ -312,7 +312,7 @@ namespace WeaponReset.Content.Weapons.OreSwords
                 {
                     OnHitEffect.Invoke(target, hit, damage);
                     if (target.knockBackResist != 0)
-                        target.velocity.Y = -5f; // 击飞
+                        target.velocity.Y = -10f; // 击飞
                 },
                 OnChange = ResetFullRot,
                 OnUse = SetFullRot

@@ -13,6 +13,8 @@ namespace WeaponReset.Content.Weapons.OreSwords
     /// </summary>
     public class OreSwordItems : BasicWeaponsItems<OreSwordItems>
     {
+        public static LocalizedText NoShiftText;
+        public static LocalizedText ShiftText;
         public static int DefCD;
         public static int DefCDMax = 120;
         public static HashSet<int> ShootSwordQiID = new()
@@ -26,6 +28,9 @@ namespace WeaponReset.Content.Weapons.OreSwords
         };
         public override void Load()
         {
+            NoShiftText = Language.GetOrRegister("Mods." + GetType().Namespace + "." + nameof(NoShiftText),() => "No Shift");
+            ShiftText = Language.GetOrRegister("Mods." + GetType().Namespace + "." + nameof(ShiftText),() => "Shift");
+
             ResetWeaponID ??= new();
             ResetWeaponID.TryAddArray(new int[]
             {
@@ -88,12 +93,27 @@ namespace WeaponReset.Content.Weapons.OreSwords
                 entity.useStyle = ItemUseStyleID.Rapier;
                 entity.useTurn = false;
                 entity.UseSound = null;
+                entity.StatsModifiedBy.Add(Mod);
             }
         }
         public override void UpdateInventory(Item item, Player player)
         {
             if (DefCD > 0)
                 DefCD--;
+        }
+        public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
+        {
+            if (Main.keyState.PressingShift())
+            {
+                string text = ShiftText.Value;
+                text = text.Replace("<left>", Language.GetTextValue("Mods.WeaponReset.Left"));
+                text = text.Replace("<right>", Language.GetTextValue("Mods.WeaponReset.Right"));
+                tooltips.Add(new(Mod, "OnShift_ShowText", text));
+            }
+            else
+            {
+                tooltips.Add(new(Mod, "OnShift_HideText", NoShiftText.WithFormatArgs(WeaponReset.UseResetBind.GetAssignedKeys(Terraria.GameInput.InputMode.Keyboard).FirstOrDefault("None")).Value));
+            }
         }
         public override void PostDrawInInventory(Item item, SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
         {
