@@ -68,7 +68,10 @@ namespace WeaponReset.Content.Weapons
                 Init();
             }
         }
-
+        public override void OnKill(int timeLeft)
+        {
+            Player.fullRotation = 0;
+        }
         public override void AI()
         {
             if (Player == null|| Player.HeldItem != SpawnItem || Player.dead) // 玩家手上物品不是生成物品,则清除

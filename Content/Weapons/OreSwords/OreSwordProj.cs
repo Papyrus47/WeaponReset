@@ -61,16 +61,22 @@ namespace WeaponReset.Content.Weapons.OreSwords
                 case ItemID_Chinese.橙陨石光剑:
                     return Color.Orange with { A = 0 } * factor;
                 case ItemID_Chinese.白陨石光剑:
+                case ItemID_Chinese.白晶光刃:
                     return Color.White with { A = 0 } * factor;
                 case ItemID_Chinese.红陨石光剑:
+                case ItemID_Chinese.红晶光刃:
                     return Color.Red with { A = 0 } * factor;
                 case ItemID_Chinese.黄陨石光剑:
+                case ItemID_Chinese.黄晶光刃:
                     return Color.Yellow with { A = 0 } * factor;
                 case ItemID_Chinese.蓝陨石光剑:
+                case ItemID_Chinese.蓝晶光刃:
                     return Color.Blue with { A = 0 } * factor;
                 case ItemID_Chinese.紫陨石光剑:
+                case ItemID_Chinese.紫晶光刃:
                     return Color.Purple with { A = 0 } * factor;
                 case ItemID_Chinese.绿陨石光剑:
+                case ItemID_Chinese.绿晶光刃:
                     return Color.Green with { A = 0 } * factor;
                 case ItemID_Chinese.火山:
                     return Color.OrangeRed with { A = 0 } * factor;

@@ -15,13 +15,17 @@ namespace WeaponReset.Content.Dusts.Particles
         }
         public override void AI()
         {
-            Velocity = Velocity.RotatedByRandom(0.3).SafeNormalize(default); // 随机旋转速度
+            Velocity = Velocity.RotatedByRandom(0.3); // 随机旋转速度
             Rotation = Velocity.ToRotation();
+            if(LifetimeCompletion > 0.8f)
+            {
+                Color *= 0.9f;
+            }
             base.AI();
         }
         public override bool PreDraw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(TexValue, Position - Main.screenPosition, Frame, Color, Rotation, Origin, new Vector2(Scale, 1) * ScaleAll, SpriteEffects.None, 0);
+            spriteBatch.Draw(TexValue, Position - Main.screenPosition, Frame, Color * (LifetimeCompletion * 20f % 1f), Rotation, Origin, new Vector2(Scale, 1) * ScaleAll, (SpriteEffects)(LifetimeCompletion * 60f % 1f > 0).ToInt(), 0);
             return false;
         }
     }

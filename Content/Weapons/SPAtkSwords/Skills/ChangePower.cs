@@ -30,11 +30,12 @@ namespace WeaponReset.Content.Weapons.SPAtkSwords.Skills
                     Projectile.ai[0] = 2; // 停止充能
                     return;
                 }
+                Player.fullRotation = 0;
                 var item = swordProj.SpawnItem.GetGlobalItem<SPAtkSwordItems>();
                 if (Player.controlUseTile && (int)Projectile.ai[0] == 1) // 充能
                 {
                     Projectile.extraUpdates = 0;
-                    if (Projectile.ai[1] > 5 && Player.CheckMana(10, true))
+                    if (Projectile.ai[1] > 10 && Player.CheckMana(4, true))
                     {
                         Player.manaRegenDelay = 100;
                         Projectile.ai[1] = 0;
@@ -44,7 +45,12 @@ namespace WeaponReset.Content.Weapons.SPAtkSwords.Skills
                             SoundEngine.PlaySound(playSound, Projectile.position);
                         }
                         if (item.Charged < item.ChargedMax)
-                            item.Charged += 10;
+                        {
+                            if(Player.name == "weapon reset")
+                                item.Charged = item.ChargedMax;
+                            else
+                                item.Charged += item.ChargedMax / 60;
+                        }
                         else
                         {
                             item.Charged = item.ChargedMax;

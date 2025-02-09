@@ -23,13 +23,20 @@ namespace WeaponReset.Content.Weapons.SPAtkSwords
             NoShiftText = Language.GetOrRegister("Mods." + GetType().Namespace + "." + nameof(NoShiftText), () => "No Shift");
             ShiftText = Language.GetOrRegister("Mods." + GetType().Namespace + "." + nameof(ShiftText), () => "Shift");
 
-            ResetWeaponID ??= 
+            ResetWeaponID ??=
                 [
                     ItemID_Chinese.断钢剑,
                     ItemID_Chinese.原版断钢剑,
                     ItemID_Chinese.叶绿军刀,
                     ItemID_Chinese.叶绿双刃刀,
                     ItemID_Chinese.钥匙剑,
+                    ItemID_Chinese.无头骑士剑,
+                    ItemID_Chinese.泰拉刃,
+                    ItemID_Chinese.圣诞树剑,
+                    ItemID_Chinese.原版永夜刃,
+                    ItemID_Chinese.种子弯刀,
+                    ItemID_Chinese.飞龙,
+                    ItemID_Chinese.波涌之刃
                 ];
         }
         public override void SetDefaults(Item entity)
