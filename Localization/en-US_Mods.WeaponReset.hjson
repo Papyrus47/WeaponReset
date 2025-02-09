@@ -34,12 +34,13 @@ Content: {
 
 		SPAtkSwords: {
 			NoShiftText: "{$Mods.WeaponReset.Content.Weapons.OreSwords.NoShiftText}"
-			ShiftText: 
-			'''
-			<left>-><left>-><left>-><left>-><left>(Can hold) for a basis attack.
-			<right> for charged wepaon.
-			<left>-><right> for a block attack (The first half block will block all damage).
-			'''
+			ShiftText:
+				'''
+				<left>-><left>-><left>-><left>-><left>(Can hold) for a basis attack.
+				<right> for charged wepaon.
+				<left>-><right> for a block attack (The first half block will block all damage).
+				Has charged,<left>-><left>for a storng attack.
+				'''
 		}
 	}
 }

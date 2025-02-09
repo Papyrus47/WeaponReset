@@ -25,7 +25,10 @@ namespace WeaponReset.Content.Weapons.SPAtkSwords
 
             ResetWeaponID ??= 
                 [
-                    ItemID_Chinese.断钢剑
+                    ItemID_Chinese.断钢剑,
+                    ItemID_Chinese.原版断钢剑,
+                    ItemID_Chinese.叶绿军刀,
+                    ItemID_Chinese.叶绿双刃刀
                 ];
         }
         public override void SetDefaults(Item entity)

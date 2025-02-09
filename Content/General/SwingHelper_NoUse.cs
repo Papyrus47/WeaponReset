@@ -4,13 +4,13 @@ namespace WeaponReset.Content.General
 {
     public class SwingHelper_NoUse : ProjSkill_Instantiation
     {
-        public Player player;
-        public SwingHelper swingHelper;
+        public Player Player;
+        public SwingHelper SwingHelper;
         public float Length = 30;
         public SwingHelper_NoUse(Player player, SwingHelper swingHelper, ModProjectile proj) : base(proj)
         {
-            this.player = player;
-            this.swingHelper = swingHelper;
+            this.Player = player;
+            this.SwingHelper = swingHelper;
         }
         public override void AI()
         {
@@ -18,21 +18,21 @@ namespace WeaponReset.Content.General
             //Projectile.localAI[0] %= 6.28f;
             //float rotation = Projectile.localAI[0] % (MathHelper.PiOver4 * 2) - MathHelper.PiOver4;
             SkillTimeOut = false;
-            player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, player.velocity.X / 10f); // 设置玩家的前臂为合成状态，并设置其伸展程度为Full
-            player.itemRotation = player.compositeFrontArm.rotation; // 设置玩家的手臂角度为玩家的前臂的旋转角度
+            Player.SetCompositeArmFront(true, Player.CompositeArmStretchAmount.Full, Player.velocity.X / 10f); // 设置玩家的前臂为合成状态，并设置其伸展程度为Full
+            Player.itemRotation = Player.compositeFrontArm.rotation; // 设置玩家的手臂角度为玩家的前臂的旋转角度
 
-            if (player.velocity.X != player.oldVelocity.X && Main.myPlayer == Projectile.owner)
+            if (Player.velocity.X != Player.oldVelocity.X && Main.myPlayer == Projectile.owner)
                 Projectile.netUpdate = true;
 
-            player.heldProj = Projectile.whoAmI;
-            swingHelper.Change(Vector2.UnitY, Vector2.One, 0); // 起始位置,缩放
-            swingHelper.ProjFixedPos(player.GetFrontHandPosition(Player.CompositeArmStretchAmount.Full, player.velocity.X / 10f), -Length * 0.02f);
-            swingHelper.SetSwingActive(); // 激活挥舞
-            Projectile.spriteDirection = player.direction; // 弹幕贴图朝向与玩家一致
-            player.fullRotationOrigin = player.Size * 0.5f;
-            player.fullRotation = player.velocity.X * 0.05f;
+            Player.heldProj = Projectile.whoAmI;
+            SwingHelper.Change(Vector2.UnitY, Vector2.One, 0); // 起始位置,缩放
+            SwingHelper.ProjFixedPos(Player.GetFrontHandPosition(Player.CompositeArmStretchAmount.Full, Player.velocity.X / 10f), -Length * 0.02f);
+            SwingHelper.SetSwingActive(); // 激活挥舞
+            Projectile.spriteDirection = Player.direction; // 弹幕贴图朝向与玩家一致
+            Player.fullRotationOrigin = Player.Size * 0.5f;
+            Player.fullRotation = Player.velocity.X * 0.05f;
             //player.legRotation = -player.fullRotation;
-            swingHelper.SwingAI(Length, player.direction, player.velocity.X / 10f * player.direction - MathHelper.PiOver2);
+            SwingHelper.SwingAI(Length, Player.direction, Player.velocity.X / 10f * Player.direction - MathHelper.PiOver2);
         }
         public override void OnSkillActive()
         {
@@ -44,7 +44,7 @@ namespace WeaponReset.Content.General
         public override bool? CanDamage() => false; // 无法造成伤害
         public override bool PreDraw(SpriteBatch sb, ref Color lightColor)
         {
-            swingHelper.Swing_Draw_ItemAndTrailling(lightColor, null, null); // 用这个只绘制弹幕本体
+            SwingHelper.Swing_Draw_ItemAndTrailling(lightColor, null, null); // 用这个只绘制弹幕本体
             // 禁用绘制
             return false;
         }

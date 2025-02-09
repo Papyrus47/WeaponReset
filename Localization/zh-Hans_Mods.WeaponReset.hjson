@@ -35,11 +35,12 @@ Content: {
 		SPAtkSwords: {
 			// NoShiftText: "{$Mods.WeaponReset.Content.Weapons.OreSwords.NoShiftText}"
 			ShiftText:
-			'''
-			<left>-><left>-<left>>-<left>>-<left>>（可以持有）进行基础攻击。
-			<right>充能武器。
-			<left>-><right> 格挡攻击（前半段防御格挡所有伤害）。
-			'''
+				'''
+				<left>-><left>-><left>-><left>-><left>（可以持有）进行基础攻击。
+				<right>充能武器。
+				<left>-><right> 格挡攻击（前半段防御格挡所有伤害）。
+				拥有充能时,<left>-><left>为强化攻击。
+				'''
 		}
 	}
 }

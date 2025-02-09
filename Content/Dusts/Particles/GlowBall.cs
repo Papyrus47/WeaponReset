@@ -19,7 +19,11 @@ namespace WeaponReset.Content.Dusts.Particles
         }
         public override void AI()
         {
-            Velocity = Velocity.RotatedByRandom(0.1); // 随机旋转速度
+            Velocity = Velocity.RotatedByRandom(0.1) * 0.95f; // 随机旋转速度
+            if(Velocity.Length() < 5f && Time < 100)
+            {
+                Time = 100; // 粒子存在时间限制
+            }
 
             if (LifetimeCompletion > 0.8f) // 粒子存在时间的80%时，颜色变淡
             {

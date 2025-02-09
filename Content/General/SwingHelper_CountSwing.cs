@@ -56,6 +56,7 @@ namespace WeaponReset.Content.General
                         {
                             SoundEngine.PlaySound(playSound, Player.position);
                             SwingHelper.SetNotSaveOldVel();
+                            Projectile.numHits = 0;
                             TheUtility.ResetProjHit(Projectile);
                         }
                         SyncData();
