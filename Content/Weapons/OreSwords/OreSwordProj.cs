@@ -158,7 +158,7 @@ namespace WeaponReset.Content.Weapons.OreSwords
         public virtual void LastModifyHit(NPC target, ref NPC.HitModifiers hitModifiers)
         {
             hitModifiers.SourceDamage += DamageAdd;
-            hitModifiers.FinalDamage *= 2;
+            hitModifiers.SourceDamage *= 2;
         }
         public virtual void NoHitChange(SwingHelper_GeneralSwing swingHelper_GeneralSwing)
         {

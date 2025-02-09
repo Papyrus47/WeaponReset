@@ -1,4 +1,5 @@
-﻿using Terraria.ModLoader.Config;
+﻿using System.ComponentModel;
+using Terraria.ModLoader.Config;
 
 namespace WeaponReset.Command.Configs
 {
@@ -6,7 +7,8 @@ namespace WeaponReset.Command.Configs
     {
         public static Setting Instance;
         public override ConfigScope Mode => ConfigScope.ClientSide;
-        public List<Item> SettingNoResetWeapon = new();
+        [DefaultValue(false)]
+        public bool DrawScaleWeapon;
         public override void OnLoaded()
         {
             base.OnLoaded();

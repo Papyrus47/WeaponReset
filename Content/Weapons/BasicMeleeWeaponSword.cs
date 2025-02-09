@@ -11,6 +11,7 @@ using Terraria.DataStructures;
 using Terraria.GameContent;
 using Terraria.ModLoader.IO;
 using WeaponReset.Command;
+using WeaponReset.Command.Configs;
 
 namespace WeaponReset.Content.Weapons
 {
@@ -59,6 +60,7 @@ namespace WeaponReset.Content.Weapons
                 Projectile.scale = Player.GetAdjustedItemScale(SpawnItem);
                 Projectile.Size = SpawnItem.Size * Projectile.scale;
                 SwingHelper.DrawTrailCount = 3; // 绘制拖尾的次数
+                SwingHelper.DrawItem_ScaleMoreThanOne = Setting.Instance.DrawScaleWeapon; // 绘制武器的比例是否大于1
                 IDParis = new();
                 SkillsParis = new();
                 //SwingLength = Projectile.Size.Length();
@@ -108,6 +110,8 @@ namespace WeaponReset.Content.Weapons
         {
             ItemLoader.ModifyHitNPC(SpawnItem, Player, target, ref modifiers); // 调用Mod物品的ModifyHitNPC
             CurrentSkill.ModifyHitNPC(target, ref modifiers);
+            modifiers.HideCombatText();
+            modifiers.FinalDamage *= 0;
         }
         public override void ModifyHitPlayer(Player target, ref Player.HurtModifiers modifiers)
         {
@@ -123,6 +127,9 @@ namespace WeaponReset.Content.Weapons
             type.GetField("_spawnTentacleSpikes", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(Player, true);
             CurrentSkill.OnHitNPC(target, hit, damageDone); // 技能命中效果
             ItemLoader.OnHitNPC(SpawnItem, Player, target, hit, damageDone); // Mod物品命中
+            ItemLoader.MeleeEffects(SpawnItem, Player, target.getRect()); // Mod物品命中近战特效
+            Player.attackCD = 0;
+            TheUtility.ItemCheck_MeleeHitNPCs(SpawnItem, Player, target.getRect(), hit.SourceDamage, hit.Knockback);
             TheUtility.VillagesItemOnHit(SpawnItem, Player, Projectile.Hitbox, Projectile.originalDamage, Projectile.knockBack, target.whoAmI, Projectile.damage, damageDone); // 原版物品命中
         }
         public override void OnHitPlayer(Player target, Player.HurtInfo info)
@@ -134,7 +141,7 @@ namespace WeaponReset.Content.Weapons
             type.GetField("_spawnTentacleSpikes", BindingFlags.NonPublic | BindingFlags.Instance).SetValue(Player, true);
             CurrentSkill.OnHitPlayer(target, info); // 技能命中效果
             ItemLoader.OnHitPvp(SpawnItem, Player, target, info); // Mod物品命中
-            TheUtility.VillagesItemOnHit(SpawnItem, Player, Projectile.Hitbox, Projectile.originalDamage, Projectile.knockBack, target.whoAmI, Projectile.damage, Projectile.originalDamage); // 原版物品命中
+            // TheUtility.VillagesItemOnHit(SpawnItem, Player, Projectile.Hitbox, Projectile.originalDamage, Projectile.knockBack, target.whoAmI, Projectile.damage, Projectile.originalDamage); // 原版物品命中
         }
         #endregion
         public abstract void Init();

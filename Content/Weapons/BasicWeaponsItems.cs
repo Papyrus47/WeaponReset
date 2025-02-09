@@ -14,14 +14,6 @@ namespace WeaponReset.Content.Weapons
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
-            if (Setting.Instance.SettingNoResetWeapon.Count > 0)
-            {
-                foreach (var item in Setting.Instance.SettingNoResetWeapon)
-                {
-                    if (entity.type == item.type)
-                        return false;
-                }
-            }
             return lateInstantiation && ResetWeaponID.Contains(entity.type);
         }
     }

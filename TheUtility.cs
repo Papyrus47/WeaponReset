@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
 using Terraria.Localization;
 using WeaponReset.Command;
 
@@ -26,6 +27,11 @@ namespace WeaponReset
         {
             Type type = player.GetType();
             type.GetMethod("ApplyNPCOnHitEffects", BindingFlags.Instance | BindingFlags.NonPublic)?.Invoke(player, new object[] { item, itemRectangle, damage, knockBack, npcIndex, dmgRandomized, dmgDone });
+        }
+        public static void ItemCheck_MeleeHitNPCs(Item sItem,Player player, Rectangle itemRectangle, int originalDamage, float knockBack)
+        {
+            Type type = player.GetType();
+            type.GetMethod("ItemCheck_MeleeHitNPCs", BindingFlags.Instance | BindingFlags.NonPublic)?.Invoke(player, [sItem, itemRectangle, originalDamage, knockBack]);
         }
         public static void Player_ItemCheck_Shoot(Player player, Item sItem, int weaponDamage)
         {

@@ -12,6 +12,11 @@ Configs: {
 			Label: Set No Reset Weapon
 			Tooltip: ""
 		}
+
+		DrawScaleWeapon: {
+			Label: Draw Scale Weapon
+			Tooltip: ""
+		}
 	}
 }
 

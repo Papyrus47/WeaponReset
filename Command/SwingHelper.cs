@@ -31,6 +31,10 @@ namespace WeaponReset.Command
         /// </summary>
         public int DrawTrailCount = 1;
         /// <summary>
+        /// 拉伸超过1
+        /// </summary>
+        public bool DrawItem_ScaleMoreThanOne;
+        /// <summary>
         /// 挥舞的启用
         /// </summary>
         public bool _acitveSwing;
@@ -358,6 +362,8 @@ namespace WeaponReset.Command
             //gd.RasterizerState = rasterizerState;
 
             Vector2 velocity = GetOldVel(-1, true);
+            if(!DrawItem_ScaleMoreThanOne)
+                velocity = velocity.Length() > Size.Length() ? velocity.SafeNormalize(Vector2.UnitX) * Size.Length() : velocity;
             Vector2 halfLength = new Vector2(-velocity.Y, velocity.X).RotatedBy(VisualRotation * spriteDirection).SafeNormalize(default)
                 * _halfSizeLength * spriteDirection;
 

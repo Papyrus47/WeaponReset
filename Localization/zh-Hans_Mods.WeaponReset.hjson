@@ -12,6 +12,11 @@ Configs: {
 			Label: 设置不重置的武器
 			// Tooltip: ""
 		}
+
+		DrawScaleWeapon: {
+			Label: 绘制倍率物品
+			// Tooltip: ""
+		}
 	}
 }
 

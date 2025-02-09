@@ -33,6 +33,8 @@ namespace WeaponReset.Content.Weapons.SPAtkSwords
                     return Color.LightGreen with { A = 0 } * factor;
                 case ItemID_Chinese.叶绿双刃刀:
                     return Color.Green with { A = 0 } * factor;
+                case ItemID_Chinese.钥匙剑:
+                    return Color.Silver with { A = 0 } * factor;
             }
             return default;
         }
@@ -62,7 +64,6 @@ namespace WeaponReset.Content.Weapons.SPAtkSwords
         public override void Init()
         {
             OldSkills = new();
-
             #region 特殊技能注册
             switch (SpawnItem.type)
             {
@@ -264,6 +265,162 @@ namespace WeaponReset.Content.Weapons.SPAtkSwords
                                 {
                                     OnHitEffect(target,hit,dmg);
                                     if(Projectile.numHits < 5)
+                                        TheUtility.ResetProjHit(Projectile);
+                                },
+                                ModifyHit = LastModifyHit,
+                                OnChange = ResetFullRot,
+                                OnUse = (skill) =>
+                                {
+                                    SetFullRot(skill);
+                                    Shoot(skill);
+                                }
+
+                            }, SwingHelper, Player)
+                            {
+                                CanMoveScreen = true,
+                            }
+                        ];
+                    break;
+                case ItemID_Chinese.钥匙剑:
+                    SPSkills =
+                        [
+                        new SwingHelper_CountSwing(this, // 横斩,卡肉
+                            setting: new() // 设置
+                            {
+                                SwingLenght = Projectile.Size.Length(),// 挥舞长度
+                                ChangeCondition = () => Player.controlUseItem && HasCharged(SPAtkSwordGlobalItem.ChargedMax / 2),
+                                SwingRot = MathHelper.Pi + MathHelper.PiOver2, // 挥舞角度
+                                preDraw = DrawProj,
+                                SwingDirectionChange = true, // 挥舞方向变化
+                                StartVel = -Vector2.UnitY.RotatedBy(-MathHelper.PiOver4),// 起始速度朝向
+                                VelScale = new Vector2(2, 1.3f), // 速度缩放
+                                VisualRotation = -0.7f, // 视觉朝向
+                                OnHitStopTime = 3, // 击中后停留时间
+                                ActionDmg = 1.5f, // 伤害倍率
+                            },
+                            preAtk: new() // 攻击前
+                            {
+                                PreTime = 3, // 前摇时间
+                                OnChange = (skill) =>
+                                {
+                                    ChangeToRot(skill);
+                                    UseCharged(SPAtkSwordGlobalItem.ChargedMax / 2);
+                                }
+                            },
+                            postAtk: new() // 攻击后
+                            {
+                                PostMaxTime = 30, // 后摇最大时间
+                                PostAtkTime = 10, // 后摇切换时间
+                            }, onAtk: new() // 攻击时
+                            {
+                                SwingTime = AttackSpeed() / 2, // 挥舞时间
+                                TimeChange = swingChange, // 时间变化函数
+                                OnHit = (target,hit,dmg) =>
+                                {
+                                    OnHitEffect(target,hit,dmg);
+                                    if(Projectile.numHits < 3)
+                                        TheUtility.ResetProjHit(Projectile);
+                                },
+                                ModifyHit = LastModifyHit,
+                                OnChange = (skill) =>
+                                {
+                                    ResetFullRot(skill);
+                                    skill.setting.SwingDirectionChange = !skill.setting.SwingDirectionChange;// 挥舞方向变化
+                                    skill.setting.StartVel.Y = -skill.setting.StartVel.Y; // 起始朝向
+                                    SwingHelper.Change(skill.setting.StartVel, skill.setting.VelScale, skill.setting.VisualRotation);
+                                },
+                                OnUse = (skill) =>
+                                {
+                                    SetFullRot(skill);
+                                    Shoot(skill);
+
+                                }
+
+                            }, SwingHelper, Player,3)
+                            {
+                                CanMoveScreen = true,
+                            },
+                            new SwingHelper_GeneralSwing(this,
+                            setting: new() // 设置
+                            {
+                                SwingLenght = Projectile.Size.Length(),// 挥舞长度
+                                ChangeCondition = () => true,
+                                SwingRot = MathHelper.Pi + MathHelper.PiOver2, // 挥舞角度
+                                preDraw = DrawProj,
+                                SwingDirectionChange = true, // 挥舞方向变化
+                                StartVel = -Vector2.UnitY.RotatedBy(-MathHelper.PiOver4),// 起始速度朝向
+                                VelScale = new Vector2(2, 1.3f), // 速度缩放
+                                VisualRotation = -0.7f, // 视觉朝向
+                                OnHitStopTime = 3, // 击中后停留时间
+                                ActionDmg = 3f, // 伤害倍率
+                            },
+                            preAtk: new() // 攻击前
+                            {
+                                PreTime = 3, // 前摇时间
+                                OnChange = (skill) =>
+                                {
+                                    ChangeToRot(skill);
+                                    Projectile.damage += SPAtkSwordGlobalItem.Charged;
+                                    UseCharged(SPAtkSwordGlobalItem.Charged);
+                                }
+                            },
+                            postAtk: new() // 攻击后
+                            {
+                                PostMaxTime = 30, // 后摇最大时间
+                                PostAtkTime = 10, // 后摇切换时间
+                            }, onAtk: new() // 攻击时
+                            {
+                                SwingTime = AttackSpeed() / 2, // 挥舞时间
+                                TimeChange = swingChange, // 时间变化函数
+                                OnHit = (target,hit,dmg) =>
+                                {
+                                    OnHitEffect(target,hit,dmg);
+                                    if(Projectile.numHits < 2)
+                                        TheUtility.ResetProjHit(Projectile);
+                                },
+                                ModifyHit = LastModifyHit,
+                                OnChange = ResetFullRot,
+                                OnUse = (skill) =>
+                                {
+                                    SetFullRot(skill);
+                                    Shoot(skill);
+                                }
+
+                            }, SwingHelper, Player)
+                            {
+                                CanMoveScreen = true,
+                            },
+                         new SwingHelper_GeneralSwing(this,
+                            setting: new() // 设置
+                            {
+                                SwingLenght = Projectile.Size.Length(),// 挥舞长度
+                                ChangeCondition = () => true,
+                                SwingRot = MathHelper.Pi + MathHelper.PiOver2, // 挥舞角度
+                                preDraw = DrawProj,
+                                SwingDirectionChange = false, // 挥舞方向变化
+                                StartVel = Vector2.UnitY.RotatedBy(MathHelper.PiOver4),// 起始速度朝向
+                                VelScale = new Vector2(2, 2f), // 速度缩放
+                                VisualRotation = 0f, // 视觉朝向
+                                OnHitStopTime = 3, // 击中后停留时间
+                                ActionDmg = 3f, // 伤害倍率
+                            },
+                            preAtk: new() // 攻击前
+                            {
+                                PreTime = 3, // 前摇时间
+                                OnChange = ChangeToRot
+                            },
+                            postAtk: new() // 攻击后
+                            {
+                                PostMaxTime = 30, // 后摇最大时间
+                                PostAtkTime = 10, // 后摇切换时间
+                            }, onAtk: new() // 攻击时
+                            {
+                                SwingTime = AttackSpeed() / 2, // 挥舞时间
+                                TimeChange = swingChange, // 时间变化函数
+                                OnHit = (target,hit,dmg) =>
+                                {
+                                    OnHitEffect(target,hit,dmg);
+                                    if(Projectile.numHits < 3)
                                         TheUtility.ResetProjHit(Projectile);
                                 },
                                 ModifyHit = LastModifyHit,
@@ -673,7 +830,7 @@ namespace WeaponReset.Content.Weapons.SPAtkSwords
         public virtual void LastModifyHit(NPC target, ref NPC.HitModifiers hitModifiers)
         {
             hitModifiers.SourceDamage += DamageAdd;
-            hitModifiers.FinalDamage *= 1.5f;
+            hitModifiers.SourceDamage *= 1.5f;
         }
         public virtual void NoHitChange(SwingHelper_GeneralSwing swingHelper_GeneralSwing)
         {
@@ -768,6 +925,7 @@ namespace WeaponReset.Content.Weapons.SPAtkSwords
 
         public virtual bool DrawProj(SpriteBatch spriteBatch, Color drawColor)
         {
+            SwingHelper.Swing_TrailingDraw(TextureAssets.Extra[209].Value, (_) => Color.White with { A = 0} * 0.2f,null);
             SwingHelper.Swing_Draw_ItemAndTrailling(drawColor, TextureAssets.Extra[201].Value, GetColor);
             return false;
         }
