@@ -43,9 +43,12 @@ namespace WeaponReset.Content.Weapons.SPAtkSwords
                 case ItemID_Chinese.原版永夜刃:
                     return Color.Lerp(Color.Purple * 0.5f,Color.DarkGreen,factor) with { A = 0 };
                 case ItemID_Chinese.飞龙:
+                case ItemID_Chinese.狂星之怒:
                     return Color.Lerp(Color.Yellow * 0.1f, Color.Red, factor) with { A = 0 };
                 case ItemID_Chinese.波涌之刃:
                     return Color.LightBlue with { A = 0 } * factor;
+                case ItemID_Chinese.彩虹猫之刃:
+                    return Main.DiscoColor with { A = 0 } * factor;
             }
             return default;
         }
@@ -548,6 +551,8 @@ namespace WeaponReset.Content.Weapons.SPAtkSwords
                         CanMoveScreen = true,
                     }];
                     break;
+                case ItemID_Chinese.狂星之怒:
+                case ItemID_Chinese.彩虹猫之刃:
                 case ItemID_Chinese.泰拉刃:
                     SPSkills =
                         [
@@ -607,6 +612,18 @@ namespace WeaponReset.Content.Weapons.SPAtkSwords
                                 {
                                     SetFullRot(skill);
                                     Shoot(skill);
+                                    if(SpawnItem.type == ItemID_Chinese.狂星之怒 || SpawnItem.type == ItemID_Chinese.彩虹猫之刃)
+                                    {
+                                        if ((int)Projectile.ai[1] == (int)(skill.onAtk.SwingTime / 2) * (Projectile.extraUpdates + 1) && Main.myPlayer == Player.whoAmI) // 额外发射弹幕
+                                        {
+                                            Projectile.NewProjectile(Player.GetSource_ItemUse(SpawnItem),Projectile.Center,(Main.MouseWorld - Player.Center).SafeNormalize(default) * SpawnItem.shootSpeed,
+                                                SpawnItem.shoot,(int)(Projectile.damage * skill.setting.ActionDmg),Player.GetWeaponKnockback(SpawnItem),Player.whoAmI);
+                                            Projectile.NewProjectile(Player.GetSource_ItemUse(SpawnItem),Projectile.Center,(Main.MouseWorld - Player.Center).SafeNormalize(default).RotatedBy(0.2) * SpawnItem.shootSpeed,
+                                                SpawnItem.shoot,(int)(Projectile.damage * skill.setting.ActionDmg),Player.GetWeaponKnockback(SpawnItem),Player.whoAmI);
+                                            Projectile.NewProjectile(Player.GetSource_ItemUse(SpawnItem),Projectile.Center,(Main.MouseWorld - Player.Center).SafeNormalize(default).RotatedBy(-0.2) * SpawnItem.shootSpeed,
+                                                SpawnItem.shoot,(int)(Projectile.damage * skill.setting.ActionDmg),Player.GetWeaponKnockback(SpawnItem),Player.whoAmI);
+                                        }
+                                    }
                                 }
 
                             }, SwingHelper, Player,5)

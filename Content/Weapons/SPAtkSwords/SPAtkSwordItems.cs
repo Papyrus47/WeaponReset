@@ -36,7 +36,9 @@ namespace WeaponReset.Content.Weapons.SPAtkSwords
                     ItemID_Chinese.原版永夜刃,
                     ItemID_Chinese.种子弯刀,
                     ItemID_Chinese.飞龙,
-                    ItemID_Chinese.波涌之刃
+                    ItemID_Chinese.波涌之刃,
+                    ItemID_Chinese.狂星之怒,
+                    ItemID_Chinese.彩虹猫之刃
                 ];
         }
         public override void SetDefaults(Item entity)
