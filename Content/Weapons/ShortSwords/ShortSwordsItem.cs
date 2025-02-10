@@ -10,8 +10,6 @@ namespace WeaponReset.Content.Weapons.ShortSwords
 {
     public class ShortSwordsItem : BasicWeaponsItems<ShortSwordsItem>
     {
-        public static LocalizedText NoShiftText;
-        public static LocalizedText ShiftText;
         public override void Load()
         {
             NoShiftText = Language.GetOrRegister("Mods." + GetType().Namespace + "." + nameof(NoShiftText), () => "No Shift");
@@ -47,8 +45,8 @@ namespace WeaponReset.Content.Weapons.ShortSwords
             if (Main.keyState.PressingShift())
             {
                 string text = ShiftText.Value;
-                text = text.Replace("<left>", Language.GetTextValue("Mods.WeaponReset.Left"));
-                text = text.Replace("<right>", Language.GetTextValue("Mods.WeaponReset.Right"));
+                //text = text.Replace("<left>", Language.GetTextValue("Mods.WeaponReset.Left"));
+                //text = text.Replace("<right>", Language.GetTextValue("Mods.WeaponReset.Right"));
                 tooltips.Add(new(Mod, "OnShift_ShowText", text));
             }
             else

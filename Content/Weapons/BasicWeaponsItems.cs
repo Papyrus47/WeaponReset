@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WeaponReset.Command.Configs;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WeaponReset.Content.Weapons
 {
@@ -12,10 +13,12 @@ namespace WeaponReset.Content.Weapons
     {
         public static bool CanResetWeapon = true;
         public static HashSet<int> ResetWeaponID;
+        public static LocalizedText NoShiftText;
+        public static LocalizedText ShiftText;
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
-            return lateInstantiation && ResetWeaponID.Contains(entity.type);
+            return lateInstantiation && ResetWeaponID?.Contains(entity.type) == true;
         }
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
@@ -33,6 +36,8 @@ namespace WeaponReset.Content.Weapons
                         tooltips.Add(item1);
                     }
                 }
+                tooltip.Text = tooltip.Text.Replace("<left>", Language.GetTextValue("Mods.WeaponReset.Left"));
+                tooltip.Text = tooltip.Text.Replace("<right>", Language.GetTextValue("Mods.WeaponReset.Right"));
             }
         }
     }

@@ -11,8 +11,6 @@ namespace WeaponReset.Content.Weapons.SPAtkSwords
 {
     public class SPAtkSwordItems : BasicWeaponsItems<SPAtkSwordItems>
     {
-        public static LocalizedText NoShiftText;
-        public static LocalizedText ShiftText;
         public static int DefCD;
         public static int DefCDMax = 120;
 
@@ -72,8 +70,8 @@ namespace WeaponReset.Content.Weapons.SPAtkSwords
             if (Main.keyState.PressingShift())
             {
                 string text = ShiftText.Value;
-                text = text.Replace("<left>", Language.GetTextValue("Mods.WeaponReset.Left"));
-                text = text.Replace("<right>", Language.GetTextValue("Mods.WeaponReset.Right"));
+                //text = text.Replace("<left>", Language.GetTextValue("Mods.WeaponReset.Left"));
+                //text = text.Replace("<right>", Language.GetTextValue("Mods.WeaponReset.Right"));
                 tooltips.Add(new(Mod, "OnShift_ShowText", text));
             }
             else

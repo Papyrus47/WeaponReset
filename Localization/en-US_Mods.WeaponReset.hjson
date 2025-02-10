@@ -59,6 +59,11 @@ Content: {
 				Dash attack will add Buff <Vulnerable> to 5 count and 2 strength.
 				'''
 		}
+
+		FlailsProj: {
+			NoShiftText: No Shift
+			ShiftText: Shift
+		}
 	}
 }
 

@@ -59,6 +59,11 @@ Content: {
 				冲刺攻击施加效果5层2强度<Vulnerable>
 				'''
 		}
+
+		FlailsProj: {
+			// NoShiftText: No Shift
+			// ShiftText: Shift
+		}
 	}
 }
 
