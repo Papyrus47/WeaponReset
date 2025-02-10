@@ -18,6 +18,11 @@ Configs: {
 			Label: Draw Scale Weapon
 			Tooltip: ""
 		}
+
+		RangedUseReload: {
+			Label: Ranged Use Reload
+			Tooltip: ""
+		}
 	}
 }
 

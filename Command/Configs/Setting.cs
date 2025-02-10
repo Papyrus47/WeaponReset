@@ -9,6 +9,8 @@ namespace WeaponReset.Command.Configs
         public override ConfigScope Mode => ConfigScope.ClientSide;
         [DefaultValue(false)]
         public bool DrawScaleWeapon;
+        [DefaultValue(true)]
+        public bool RangedUseReload;
         public override void OnLoaded()
         {
             base.OnLoaded();

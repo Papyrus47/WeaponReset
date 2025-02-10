@@ -18,6 +18,11 @@ Configs: {
 			Label: 绘制倍率物品
 			// Tooltip: ""
 		}
+
+		RangedUseReload: {
+			// Label: Ranged Use Reload
+			// Tooltip: ""
+		}
 	}
 }
 
