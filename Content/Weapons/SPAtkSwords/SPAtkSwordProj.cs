@@ -1171,7 +1171,7 @@ namespace WeaponReset.Content.Weapons.SPAtkSwords
                 OnChange = ChangeToRot,
                 OnUse = (_) =>
                 {
-                    OreSwordItems.DefCD = OreSwordItems.DefCDMax;
+                    SPAtkSwordItems.DefCD = SPAtkSwordItems.DefCDMax;
                 }
             },
             postAtk: new() // 攻击后
