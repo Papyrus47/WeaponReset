@@ -12,6 +12,8 @@ namespace WeaponReset
 	public class WeaponReset : Mod
 	{
 		public static ModKeybind UseResetBind;
+        public static LocalizedText VulnerableNameText;
+        public static LocalizedText VulnerableTooltipText;
         public enum NetUpdateWho : byte
         {
             Player = 0
@@ -49,6 +51,8 @@ namespace WeaponReset
         {
             if(!Main.dedServ)
             {
+                VulnerableNameText = Language.GetOrRegister("Mods." + GetType().Namespace + ".NPCBuffs." + nameof(VulnerableNameText)); // 注册语言文本
+                VulnerableTooltipText = Language.GetOrRegister("Mods." + GetType().Namespace + ".NPCBuffs." + nameof(VulnerableTooltipText)); // 注册语言文本
                 Main.mapEnabled = true; // 开启地图
                 UseResetBind = KeybindLoader.RegisterKeybind(this, nameof(UseResetBind), Microsoft.Xna.Framework.Input.Keys.F);
             }

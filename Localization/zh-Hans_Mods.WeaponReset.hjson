@@ -50,8 +50,19 @@ Content: {
 		}
 
 		ShortSwords: {
-			// NoShiftText: No Shift
-			// ShiftText: Shift
+			// NoShiftText: "{$Mods.WeaponReset.Content.Weapons.OreSwords.NoShiftText}"
+			ShiftText:
+				'''
+				<left>-><left>-><left>为基础攻击
+				<right>-><right>-><right>为急速攻击
+				<right>-><left>为冲刺攻击
+				冲刺攻击施加效果5层2强度<Vulnerable>
+				'''
 		}
 	}
+}
+
+NPCBuffs: {
+	VulnerableNameText: 脆弱
+	VulnerableTooltipText: 每有1强度增加10%伤害
 }

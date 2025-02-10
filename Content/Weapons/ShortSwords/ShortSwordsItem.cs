@@ -55,6 +55,7 @@ namespace WeaponReset.Content.Weapons.ShortSwords
             {
                 tooltips.Add(new(Mod, "OnShift_HideText", NoShiftText.WithFormatArgs(WeaponReset.UseResetBind.GetAssignedKeys(Terraria.GameInput.InputMode.Keyboard).FirstOrDefault("None")).Value));
             }
+            base.ModifyTooltips(item, tooltips);
         }
         public override void HoldItem(Item item, Player player)
         {

@@ -50,8 +50,19 @@ Content: {
 		}
 
 		ShortSwords: {
-			NoShiftText: No Shift
-			ShiftText: Shift
+			NoShiftText: "{$Mods.WeaponReset.Content.Weapons.OreSwords.NoShiftText}"
+			ShiftText:
+				'''
+				<left>-><left>-><left>for a basis attack.
+				<right>-><right>-><right>for a speed attack.
+				<right>-><left>for a dash attack.
+				Dash attack will add Buff <Vulnerable> to 5 count and 2 strength.
+				'''
 		}
 	}
+}
+
+NPCBuffs: {
+	VulnerableNameText: Vulnerable
+	VulnerableTooltipText: Damage is increased by 10% has 1 strength.
 }

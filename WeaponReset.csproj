@@ -12,6 +12,7 @@
 	  <None Remove="Localization\zh-Hans_Mods.WeaponReset.hjson" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Folder Include="Command\GlobalItems\" />
 	  <Folder Include="Content\Dusts\Dusts\" />
 	  <Folder Include="Content\Items\" />
 	</ItemGroup>
