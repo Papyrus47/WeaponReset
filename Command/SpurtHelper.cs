@@ -1,4 +1,6 @@
-﻿using Terraria.GameContent;
+﻿using System.IO;
+using Terraria.GameContent;
+using Terraria.Graphics.Effects;
 
 namespace WeaponReset.Command
 {
@@ -26,13 +28,13 @@ namespace WeaponReset.Command
             float scaleX = args.Length > 0 ? (float)args[0] : 1f;
             #region 绘制突刺
             Texture2D tex2 = TextureAssets.Projectile[927].Value;
-            Vector2 scale = new Vector2(spurt.SpurtLenght / tex2.Width, 1f) * projectile.scale;
-            sb.Draw(tex2, drawPos, null, projectile.GetAlpha(Color.White), projectile.rotation - MathHelper.PiOver4, new Vector2(tex2.Width / 4f * scaleX, tex2.Height / 2f), scale, SpriteEffects.None, 0f);
+            Vector2 scale = new Vector2(spurt.SpurtLenght / tex2.Width, scaleX) * projectile.scale;
+            sb.Draw(tex2, drawPos, null, projectile.GetAlpha(Color.White), projectile.rotation, new Vector2(tex2.Width / 4f, tex2.Height / 2f), scale, SpriteEffects.None, 0f);
             #endregion
             #region 绘制弹幕
             Texture2D tex = TextureAssets.Projectile[projectile.type].Value;
             Rectangle drawRect = new Rectangle(0, (int)((float)projectile.frame / Main.projFrames[projectile.type] * tex.Height), tex.Width, tex.Height);
-            sb.Draw(tex, drawPos, drawRect, Lighting.GetColor((spurt.SpurtPos / 16).ToPoint()), projectile.rotation, drawSize / 2f, projectile.scale, SpriteEffects.None, 0f);
+            sb.Draw(tex, drawPos, drawRect, Lighting.GetColor((spurt.SpurtPos / 16).ToPoint()), projectile.rotation + MathHelper.PiOver4, drawSize / 2f, projectile.scale, SpriteEffects.None, 0f);
             #endregion
         }
         /// <summary>
@@ -160,7 +162,26 @@ namespace WeaponReset.Command
             }
             return false;
         }
-        public virtual bool CanDamage() => Time % (TimeMax / DmgCount) == 0;
+        public virtual void SendData(BinaryWriter writer)
+        {
+            writer.WriteVector2(SpurtPos);
+            writer.WriteVector2(SpurtVel);
+            writer.WriteVector2(Size);
+            writer.Write(SpurtDir);
+            writer.Write(Time);
+            writer.Write(TimeMax);
+            writer.Write(DmgCount);
+        }
+        public virtual void ReadData(BinaryReader reader)
+        {
+            SpurtPos = reader.ReadVector2();
+            SpurtVel = reader.ReadVector2();
+            Size = reader.ReadVector2();
+            SpurtDir = reader.ReadInt32();
+            Time = reader.ReadInt32();
+            TimeMax = reader.ReadInt32();
+        }
+        public virtual bool CanDamage() => Time % MathF.Max(1,(TimeMax / DmgCount)) == 0;
         public virtual object Clone() => new SpurtHelper(Owner)
         {
             SpurtDir = SpurtDir,

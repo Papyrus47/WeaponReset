@@ -70,7 +70,8 @@ namespace WeaponReset.Content.Weapons
         }
         public override void OnKill(int timeLeft)
         {
-            Player.fullRotation = 0;
+            if(Player != null)
+                Player.fullRotation = 0;
         }
         public override void AI()
         {

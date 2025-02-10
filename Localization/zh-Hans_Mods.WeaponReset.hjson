@@ -2,6 +2,7 @@ Projectiles: {
 	// OreSwordProj.DisplayName: Ore Sword Proj
 	SwordQi.DisplayName: 剑气
 	// SPAtkSwordProj.DisplayName: S P Atk Sword Proj
+	// ShortSwordsProj.DisplayName: Short Swords Proj
 }
 
 Configs: {
@@ -46,6 +47,11 @@ Content: {
 				<left>-><right> 格挡攻击（前半段防御格挡所有伤害）。
 				拥有充能时,<left>-><left>为强化攻击。
 				'''
+		}
+
+		ShortSwords: {
+			// NoShiftText: No Shift
+			// ShiftText: Shift
 		}
 	}
 }

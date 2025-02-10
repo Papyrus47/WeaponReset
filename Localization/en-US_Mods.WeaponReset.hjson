@@ -2,6 +2,7 @@ Projectiles: {
 	OreSwordProj.DisplayName: Ore Sword Proj
 	SwordQi.DisplayName: Sword Qi
 	SPAtkSwordProj.DisplayName: S P Atk Sword Proj
+	ShortSwordsProj.DisplayName: Short Swords Proj
 }
 
 Configs: {
@@ -46,6 +47,11 @@ Content: {
 				<left>-><right> for a block attack (The first half block will block all damage).
 				Has charged,<left>-><left>for a storng attack.
 				'''
+		}
+
+		ShortSwords: {
+			NoShiftText: No Shift
+			ShiftText: Shift
 		}
 	}
 }

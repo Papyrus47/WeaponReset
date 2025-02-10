@@ -8,6 +8,7 @@ using Terraria;
 using Terraria.GameInput;
 using WeaponReset.Content.Weapons;
 using WeaponReset.Content.Weapons.OreSwords;
+using WeaponReset.Content.Weapons.ShortSwords;
 using WeaponReset.Content.Weapons.SPAtkSwords;
 
 namespace WeaponReset
@@ -90,7 +91,7 @@ namespace WeaponReset
             {
                 OreSwordItems.CanResetWeapon = !OreSwordItems.CanResetWeapon;
                 SPAtkSwordItems.CanResetWeapon = !SPAtkSwordItems.CanResetWeapon;
-
+                ShortSwordsItem.CanResetWeapon = !ShortSwordsItem.CanResetWeapon;
                 foreach (Item item in Player.inventory)
                 {
                     int prefix = item.prefix;
