@@ -13,6 +13,7 @@ namespace WeaponReset
 	public class WeaponReset : Mod
 	{
 		public static ModKeybind UseResetBind;
+        public static ModKeybind SpBind1;
         public static LocalizedText VulnerableNameText;
         public static LocalizedText VulnerableTooltipText;
         public enum NetUpdateWho : byte
@@ -63,6 +64,7 @@ namespace WeaponReset
                 VulnerableTooltipText = Language.GetOrRegister("Mods." + GetType().Namespace + ".NPCBuffs." + nameof(VulnerableTooltipText)); // 注册语言文本
                 Main.mapEnabled = true; // 开启地图
                 UseResetBind = KeybindLoader.RegisterKeybind(this, nameof(UseResetBind), Microsoft.Xna.Framework.Input.Keys.F);
+                SpBind1 = KeybindLoader.RegisterKeybind(this, nameof(SpBind1), Microsoft.Xna.Framework.Input.Keys.G);
             }
         }
         public override void Unload()

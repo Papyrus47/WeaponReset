@@ -26,7 +26,11 @@ Configs: {
 	}
 }
 
-Keybinds.UseResetBind.DisplayName: Use Reset Bind
+Keybinds: {
+	UseResetBind.DisplayName: Use Reset Bind
+	SpBind1.DisplayName: Sp Bind1
+}
+
 Left: Left click
 Right: Right click
 
@@ -77,6 +81,7 @@ Content: {
 				Continuous use will overheated.
 				On overheated will add attack speed,but use too long time will Can't Use.
 				Press Left Alt choose use ammo.
+				Press the (default) G key to consume mana and enhance the bullets.
 				'''
 		}
 	}

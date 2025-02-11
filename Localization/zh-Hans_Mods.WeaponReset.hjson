@@ -26,7 +26,11 @@ Configs: {
 	}
 }
 
-Keybinds.UseResetBind.DisplayName: 切换武器使用方法按键
+Keybinds: {
+	UseResetBind.DisplayName: 切换武器使用方法按键
+	SpBind1.DisplayName: 特殊控件1
+}
+
 Left: 左键
 Right: 右键
 
@@ -77,6 +81,7 @@ Content: {
 				使用将会加热。
 				过热状态下提升攻速，但是使用时间过长会无法使用一段时间。
 				按下左Alt键切换弹药。
+				按下（默认）G键消耗魔力强化子弹。
 				'''
 		}
 	}

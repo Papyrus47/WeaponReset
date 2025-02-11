@@ -5,14 +5,14 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent;
 using WeaponReset.Command.Configs;
 
 namespace WeaponReset.Content.Weapons.Guns
 {
-    public class GunsItem : GlobalItem
+    public class GunsItem : BasicWeaponsItems<GunsItem>
     {
-        public static HashSet<int> ResetWeaponID;
         /// <summary>
         /// 枪口过热
         /// </summary>
@@ -37,9 +37,10 @@ namespace WeaponReset.Content.Weapons.Guns
         /// 寻找弹药索引
         /// </summary>
         public static int FindGunsBulletIndex;
-        public static LocalizedText NoShiftText;
-        public static LocalizedText ShiftText;
-
+        /// <summary>
+        /// 子弹强化
+        /// </summary>
+        public int ManaStrong;
         public override bool InstancePerEntity => true;
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
@@ -81,7 +82,6 @@ namespace WeaponReset.Content.Weapons.Guns
 
             On_Player.ChooseAmmo += On_Player_ChooseAmmo;
         }
-
         public static Item On_Player_ChooseAmmo(On_Player.orig_ChooseAmmo orig, Player self, Item weapon)
         {
             if (weapon.TryGetGlobalItem<GunsItem>(out _)) 
@@ -107,12 +107,12 @@ namespace WeaponReset.Content.Weapons.Guns
             {
                 tooltips.Add(new(Mod, "OnShift_HideText", NoShiftText.WithFormatArgs(WeaponReset.UseResetBind.GetAssignedKeys(Terraria.GameInput.InputMode.Keyboard).FirstOrDefault("None")).Value));
             }
+            base.ModifyTooltips(item, tooltips);
         }
         public override bool CanUseItem(Item item, Player player)
         {
             if(GunsHotCD > 0)
             {
-                Dust.NewDustPerfect((player.compositeFrontArm.rotation + MathHelper.PiOver2).ToRotationVector2() * 0.8f * item.width + player.MountedCenter, DustID.Smoke, null, 100);
                 return false;
             }
             return base.CanUseItem(item, player);
@@ -124,11 +124,36 @@ namespace WeaponReset.Content.Weapons.Guns
                 GunsHot++;
             else if (GunsHotTime == 0)
                 GunsHotTime = 360;
-            if (GunsHotTime > 0)
-                velocity = velocity.RotatedByRandom(0.2);
+            velocity = velocity.RotatedByRandom(0.2 * GunsHot / GunsHotMax);
             if (GunsHot > GunsHotMax * 0.8f)
             {
-                Dust.NewDustPerfect(player.MountedCenter + velocity.SafeNormalize(default) * 0.8f * item.width, DustID.Smoke, null, 100);
+                for (int i = 0; i < 2; i++)
+                {
+                    Dust.NewDustPerfect(player.MountedCenter + velocity.SafeNormalize(default) * 0.8f * item.width, DustID.FireworksRGB, Main.rand.NextVector2Unit() * 3, 0, Color.OrangeRed, 1.4f);
+                    Dust.NewDustPerfect(player.MountedCenter + velocity.SafeNormalize(default) * 0.8f * item.width, DustID.Smoke, null, 100);
+                }
+            }
+            if(ManaStrong > 0)
+            {
+                ManaStrong--;
+                if(type == ProjectileID.Bullet || type == ProjectileID.SilverBullet)
+                    type = ProjectileID.BulletHighVelocity;
+                else
+                    velocity *= 3f;
+                damage += 1;
+                damage = (int)(damage * 1.1f);
+                knockback *= 1.5f;
+            }
+        }
+        public override void HoldItem(Item item, Player player)
+        {
+            if (WeaponReset.SpBind1.JustPressed)
+            {
+                SoundEngine.PlaySound(SoundID.Item149, player.position);
+                for (int i = 0; player.CheckMana(item.useTime, true) && i < 100; i++)
+                {
+                    ManaStrong++;
+                }
             }
         }
         public override void UpdateInventory(Item item, Player player)
@@ -140,7 +165,10 @@ namespace WeaponReset.Content.Weapons.Guns
                     GunsHot--;
             }
             if (GunsHotCD > 0)
+            {
+                Dust.NewDustPerfect((player.compositeFrontArm.rotation + MathHelper.PiOver2).ToRotationVector2() * 0.8f * item.width + player.MountedCenter, DustID.Smoke, null, 100);
                 GunsHotCD--;
+            }
             if (GunsHotTime > 0)
             {
                 if (player.ItemTimeIsZero)
@@ -156,6 +184,11 @@ namespace WeaponReset.Content.Weapons.Guns
                     GunsHotTime++;
                     if (GunsHotTime > 360 * 1.5f)
                     {
+                        for (int i = 0; i < 15; i++)
+                        {
+                            Dust.NewDustPerfect((player.compositeFrontArm.rotation + MathHelper.PiOver2).ToRotationVector2() * 0.8f * item.width + player.MountedCenter, DustID.FireworksRGB, Main.rand.NextVector2Unit() * 8, 0, Color.OrangeRed, 1.4f);
+                        }
+                        SoundEngine.PlaySound(SoundID.Item14, player.position);
                         GunsHotTime = 300;
                         GunsHotCD = 300;
                     }
