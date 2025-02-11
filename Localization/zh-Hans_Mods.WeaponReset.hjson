@@ -69,10 +69,27 @@ Content: {
 			// NoShiftText: No Shift
 			// ShiftText: Shift
 		}
+
+		Guns: {
+			NoShiftText: 按住shift显示更多消息。
+			ShiftText:
+				'''
+				使用将会加热。
+				过热状态下提升攻速，但是使用时间过长会无法使用一段时间。
+				按下左Alt键切换弹药。
+				'''
+		}
 	}
 }
 
 NPCBuffs: {
 	VulnerableNameText: 脆弱
 	VulnerableTooltipText: 每有1强度增加10%伤害
+}
+
+Items: {
+	FlySkyAcc: {
+		// DisplayName: Fly Sky Acc
+		// Tooltip: ""
+	}
 }
