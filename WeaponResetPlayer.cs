@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameInput;
 using WeaponReset.Content.Weapons;
+using WeaponReset.Content.Weapons.Guns;
 using WeaponReset.Content.Weapons.OreSwords;
 using WeaponReset.Content.Weapons.ShortSwords;
 using WeaponReset.Content.Weapons.SPAtkSwords;
@@ -31,7 +32,8 @@ namespace WeaponReset
         /// 矿石剑类防御
         /// </summary>
         public int OreSwordDef;
-        public delegate void ModifyByHit(Player player,Entity target, ref Player.HurtModifiers hurtModifiers);
+        public bool AltPressed;
+        public delegate void ModifyByHit(Player player, Entity target, ref Player.HurtModifiers hurtModifiers);
         private ModifyByHit _OnModifyByHit;
         public event ModifyByHit OnModifyByHit
         {
@@ -62,7 +64,7 @@ namespace WeaponReset
                     //    NetMessage.SyncDisconnectedPlayer(Player.whoAmI);
                     //}
                 }
-                if(OreSwordDef <= 0 && Main.netMode == NetmodeID.Server)
+                if (OreSwordDef <= 0 && Main.netMode == NetmodeID.Server)
                 {
                     NetMessage.SyncDisconnectedPlayer(Player.whoAmI);
                 }
@@ -70,7 +72,7 @@ namespace WeaponReset
         }
         public override bool ConsumableDodge(Player.HurtInfo info)
         {
-            if(PlayerImmune > 0)
+            if (PlayerImmune > 0)
             {
                 PlayerImmuneHit = true;
                 return true;
@@ -102,6 +104,41 @@ namespace WeaponReset
                     item.stack = count;
                     item.rare = rare;
                 }
+            }
+            if (Main.keyState.GetPressedKeys().Contains(Microsoft.Xna.Framework.Input.Keys.LeftAlt))
+            {
+                if (!AltPressed)
+                {
+                    AltPressed = true;
+                    if (Player.HeldItem.TryGetGlobalItem<GunsItem>(out _))
+                    {
+                        bool findAll = true;
+                        for (int i = GunsItem.FindGunsBulletIndex; i < 58; i++)
+                        {
+                            if (GunsItem.FindGunsBulletIndex != i && Player.inventory[i].stack > 0 && ItemLoader.CanChooseAmmo(Player.HeldItem, Player.inventory[i], Player))
+                            {
+                                GunsItem.FindGunsBulletIndex = i;
+                                findAll = false;
+                                break;
+                            }
+                        }
+                        if (findAll)
+                        {
+                            for (int i = 0; i < 58; i++)
+                            {
+                                if (Player.inventory[i].stack > 0 && ItemLoader.CanChooseAmmo(Player.HeldItem, Player.inventory[i], Player))
+                                {
+                                    GunsItem.FindGunsBulletIndex = i;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                AltPressed = false;
             }
         }
         public override void UpdateEquips()

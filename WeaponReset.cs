@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria.ModLoader;
+using WeaponReset.Content.Weapons.Guns;
 
 namespace WeaponReset
 {
@@ -16,7 +17,7 @@ namespace WeaponReset
         public static LocalizedText VulnerableTooltipText;
         public enum NetUpdateWho : byte
         {
-            Player = 0
+            Player = 0,
         }
 
         public enum NetUpdatePlayer : byte
@@ -25,6 +26,13 @@ namespace WeaponReset
             /// 同步效果
             /// </summary>
             ResetEffect = 0,
+        }
+        public enum NetUpdateItem:byte
+        {
+            /// <summary>
+            /// 同步枪械状态
+            /// </summary>
+            SyncGuns = 0,
         }
         public override void HandlePacket(BinaryReader reader, int whoAmI)
         {

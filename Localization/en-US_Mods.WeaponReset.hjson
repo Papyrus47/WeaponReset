@@ -69,10 +69,27 @@ Content: {
 			NoShiftText: No Shift
 			ShiftText: Shift
 		}
+
+		Guns: {
+			NoShiftText: Hold Shift to show details.
+			ShiftText:
+				'''
+				Continuous use will overheated.
+				On overheated will add attack speed,but use too long time will Can't Use.
+				Press Left Alt choose use ammo.
+				'''
+		}
 	}
 }
 
 NPCBuffs: {
 	VulnerableNameText: Vulnerable
 	VulnerableTooltipText: Damage is increased by 10% has 1 strength.
+}
+
+Items: {
+	FlySkyAcc: {
+		DisplayName: Fly Sky Acc
+		Tooltip: ""
+	}
 }
