@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameInput;
 using WeaponReset.Content.Weapons;
+using WeaponReset.Content.Weapons.Bows;
 using WeaponReset.Content.Weapons.Guns;
 using WeaponReset.Content.Weapons.OreSwords;
 using WeaponReset.Content.Weapons.ShortSwords;
@@ -96,13 +97,16 @@ namespace WeaponReset
                 ShortSwordsItem.CanResetWeapon = !ShortSwordsItem.CanResetWeapon;
                 foreach (Item item in Player.inventory)
                 {
-                    int prefix = item.prefix;
-                    int count = item.stack;
-                    int rare = item.rare;
-                    item.SetDefaults(item.type);
-                    item.prefix = prefix;
-                    item.stack = count;
-                    item.rare = rare;
+                    if (item.TryGetGlobalItem<OreSwordItems>(out _) || item.TryGetGlobalItem<SPAtkSwordItems>(out _) || item.TryGetGlobalItem<ShortSwordsItem>(out _))
+                    {
+                        int prefix = item.prefix;
+                        int count = item.stack;
+                        int rare = item.rare;
+                        item.SetDefaults(item.type);
+                        item.prefix = prefix;
+                        item.stack = count;
+                        item.rare = rare;
+                    }
                 }
             }
             if (Main.keyState.GetPressedKeys().Contains(Microsoft.Xna.Framework.Input.Keys.LeftAlt))
@@ -129,6 +133,30 @@ namespace WeaponReset
                                 if (Player.inventory[i].stack > 0 && ItemLoader.CanChooseAmmo(Player.HeldItem, Player.inventory[i], Player))
                                 {
                                     GunsItem.FindGunsBulletIndex = i;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    else if (Player.HeldItem.TryGetGlobalItem<BowsItem>(out _))
+                    {
+                        bool findAll = true;
+                        for (int i = BowsItem.FindBowsArrowIndex; i < 58; i++)
+                        {
+                            if (BowsItem.FindBowsArrowIndex != i && Player.inventory[i].stack > 0 && ItemLoader.CanChooseAmmo(Player.HeldItem, Player.inventory[i], Player))
+                            {
+                                BowsItem.FindBowsArrowIndex = i;
+                                findAll = false;
+                                break;
+                            }
+                        }
+                        if (findAll)
+                        {
+                            for (int i = 0; i < 58; i++)
+                            {
+                                if (Player.inventory[i].stack > 0 && ItemLoader.CanChooseAmmo(Player.HeldItem, Player.inventory[i], Player))
+                                {
+                                    BowsItem.FindBowsArrowIndex = i;
                                     break;
                                 }
                             }

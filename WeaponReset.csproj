@@ -14,7 +14,6 @@
 	<ItemGroup>
 	  <Folder Include="Command\GlobalItems\" />
 	  <Folder Include="Content\Dusts\Dusts\" />
-	  <Folder Include="Content\Items\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Reference Include="InnoVault">

@@ -81,7 +81,16 @@ Content: {
 				使用将会加热。
 				过热状态下提升攻速，但是使用时间过长会无法使用一段时间。
 				按下左Alt键切换弹药。
-				按下（默认）G键消耗魔力强化子弹。
+				按下{0}键消耗魔力强化子弹。
+				'''
+		}
+
+		Bows: {
+			// NoShiftText: "{$Mods.WeaponReset.Content.Weapons.Guns.NoShiftText}"
+			ShiftText:
+				'''
+				按下左Alt键切换弹药。
+				按下{0}键选择弓箭消耗弓瓶。
 				'''
 		}
 	}
@@ -95,6 +104,26 @@ NPCBuffs: {
 Items: {
 	FlySkyAcc: {
 		// DisplayName: Fly Sky Acc
+		// Tooltip: ""
+	}
+
+	IchorBottle: {
+		DisplayName: 灵液弓瓶
+		// Tooltip: ""
+	}
+
+	CursedFlameBottle: {
+		DisplayName: 诅咒焰弓瓶
+		// Tooltip: ""
+	}
+
+	Shadowflame: {
+		DisplayName: 暗黑炎弓瓶
+		// Tooltip: ""
+	}
+
+	漂浮球: {
+		// DisplayName: 漂浮球
 		// Tooltip: ""
 	}
 }

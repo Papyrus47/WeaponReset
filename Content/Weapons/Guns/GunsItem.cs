@@ -42,10 +42,6 @@ namespace WeaponReset.Content.Weapons.Guns
         /// </summary>
         public int ManaStrong;
         public override bool InstancePerEntity => true;
-        public override bool AppliesToEntity(Item entity, bool lateInstantiation)
-        {
-            return lateInstantiation && ResetWeaponID?.Contains(entity.type) == true;
-        }
         public override void Load()
         {
             NoShiftText = Language.GetOrRegister("Mods." + GetType().Namespace + "." + nameof(NoShiftText), () => "No Shift");
@@ -105,7 +101,7 @@ namespace WeaponReset.Content.Weapons.Guns
             }
             else
             {
-                tooltips.Add(new(Mod, "OnShift_HideText", NoShiftText.WithFormatArgs(WeaponReset.UseResetBind.GetAssignedKeys(Terraria.GameInput.InputMode.Keyboard).FirstOrDefault("None")).Value));
+                tooltips.Add(new(Mod, "OnShift_HideText", NoShiftText.WithFormatArgs(WeaponReset.SpBind1.GetAssignedKeys(Terraria.GameInput.InputMode.Keyboard).FirstOrDefault("None")).Value));
             }
             base.ModifyTooltips(item, tooltips);
         }

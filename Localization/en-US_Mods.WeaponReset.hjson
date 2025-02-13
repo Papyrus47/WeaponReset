@@ -81,7 +81,16 @@ Content: {
 				Continuous use will overheated.
 				On overheated will add attack speed,but use too long time will Can't Use.
 				Press Left Alt choose use ammo.
-				Press the (default) G key to consume mana and enhance the bullets.
+				Press the {0} key to consume mana and enhance the bullets.
+				'''
+		}
+
+		Bows: {
+			NoShiftText: "{$Mods.WeaponReset.Content.Weapons.Guns.NoShiftText}"
+			ShiftText:
+				'''
+				Press Left Alt choose use ammo.
+				Press the {0} key to choose use bow bottle.
 				'''
 		}
 	}
@@ -95,6 +104,26 @@ NPCBuffs: {
 Items: {
 	FlySkyAcc: {
 		DisplayName: Fly Sky Acc
+		Tooltip: ""
+	}
+
+	IchorBottle: {
+		DisplayName: Ichor Bow Bottle
+		Tooltip: ""
+	}
+
+	CursedFlameBottle: {
+		DisplayName: Cursed Flame Bow Bottle
+		Tooltip: ""
+	}
+
+	Shadowflame: {
+		DisplayName: Shadowflame Bow Bottle
+		Tooltip: ""
+	}
+
+	漂浮球: {
+		DisplayName: 漂浮球
 		Tooltip: ""
 	}
 }
