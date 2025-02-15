@@ -93,6 +93,11 @@ Content: {
 				按下{0}键选择弓箭消耗弓瓶。
 				'''
 		}
+
+		MagicStaff: {
+			// NoShiftText: No Shift
+			// ShiftText: Shift
+		}
 	}
 }
 
@@ -124,6 +129,26 @@ Items: {
 
 	漂浮球: {
 		// DisplayName: 漂浮球
+		// Tooltip: ""
+	}
+
+	CrystalBottle: {
+		DisplayName: 水晶弓瓶
+		// Tooltip: ""
+	}
+
+	MeleeBottle: {
+		DisplayName: 近战弓瓶
+		// Tooltip: ""
+	}
+
+	PowerBottle: {
+		DisplayName: 力量弓瓶
+		// Tooltip: ""
+	}
+
+	VulnerableBottle: {
+		DisplayName: 脆弱弓瓶
 		// Tooltip: ""
 	}
 }

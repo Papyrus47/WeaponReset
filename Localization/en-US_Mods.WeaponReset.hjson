@@ -93,6 +93,11 @@ Content: {
 				Press the {0} key to choose use bow bottle.
 				'''
 		}
+
+		MagicStaff: {
+			NoShiftText: No Shift
+			ShiftText: Shift
+		}
 	}
 }
 
@@ -124,6 +129,26 @@ Items: {
 
 	漂浮球: {
 		DisplayName: 漂浮球
+		Tooltip: ""
+	}
+
+	CrystalBottle: {
+		DisplayName: Crystal Bow Bottle
+		Tooltip: ""
+	}
+
+	MeleeBottle: {
+		DisplayName: Melee Bow Bottle
+		Tooltip: ""
+	}
+
+	PowerBottle: {
+		DisplayName: Power Bow Bottle
+		Tooltip: ""
+	}
+
+	VulnerableBottle: {
+		DisplayName: Vulnerable Bow Bottle
 		Tooltip: ""
 	}
 }

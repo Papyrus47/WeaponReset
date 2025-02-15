@@ -242,6 +242,7 @@ namespace WeaponReset.Content.Weapons.Guns
                 Item drawItem = localPlayer.ChooseAmmo(item); // 选择弹药
                 if (drawItem != null && !drawItem.IsAir) // 存在才开始下面的绘制内容
                 {
+                    Main.instance.LoadItem(drawItem.type);
                     tex = TextureAssets.Item[drawItem.type].Value;
                     if (Main.itemAnimations[drawItem.type] == null)
                         rect = tex.Frame(horizontalFrames: 1, verticalFrames: 1, 0, 0, 0, 0);

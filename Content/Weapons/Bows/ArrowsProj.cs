@@ -28,6 +28,10 @@ namespace WeaponReset.Content.Weapons.Bows
         {
             (UseBottel?.ModItem as BasicBowsBottle)?.ProjAI(projectile);
         }
+        public override void ModifyHitNPC(Projectile projectile, NPC target, ref NPC.HitModifiers modifiers)
+        {
+            (UseBottel?.ModItem as BasicBowsBottle)?.ModifyHitNPC(Main.player[projectile.owner], target, ref modifiers);
+        }
         public override void OnHitNPC(Projectile projectile, NPC target, NPC.HitInfo hit, int damageDone)
         {
             (UseBottel?.ModItem as BasicBowsBottle)?.OnHitNPC(Main.player[projectile.owner], target, hit, damageDone);

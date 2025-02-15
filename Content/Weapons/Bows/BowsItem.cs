@@ -74,7 +74,18 @@ namespace WeaponReset.Content.Weapons.Bows
                 ItemID_Chinese.尖桩发射器,
                 ItemID_Chinese.空中祸害,
                 ItemID_Chinese.海啸,
-                ItemID_Chinese.日暮
+                ItemID_Chinese.日暮,
+                ItemID_Chinese.幻影弓,
+                #region 弩
+                ItemID_Chinese.钴连弩,
+                ItemID_Chinese.钯金连弩,
+                ItemID_Chinese.秘银连弩,
+                ItemID_Chinese.山铜连弩,
+                ItemID_Chinese.精金连弩,
+                ItemID_Chinese.钛金连弩,
+                ItemID_Chinese.神圣连弩,
+                ItemID_Chinese.叶绿连弩
+                #endregion
                 ]);
 
             On_Player.ChooseAmmo += On_Player_ChooseAmmo;
@@ -197,6 +208,7 @@ namespace WeaponReset.Content.Weapons.Bows
                 if(FindBowsBottleIndex != -1 && localPlayer.inventory[FindBowsBottleIndex] != null && localPlayer.inventory[FindBowsBottleIndex].stack > 0 && localPlayer.inventory[FindBowsBottleIndex].ModItem is BasicBowsBottle)
                 {
                     Texture2D tex = TextureAssets.Item[localPlayer.inventory[FindBowsBottleIndex].type].Value;
+                    Main.instance.LoadItem(localPlayer.inventory[FindBowsBottleIndex].type);
                     Rectangle rect = default;
                     if (Main.itemAnimations[drawItem.type] == null)
                         rect = tex.Frame(horizontalFrames: 1, verticalFrames: 1, 0, 0, 0, 0);
