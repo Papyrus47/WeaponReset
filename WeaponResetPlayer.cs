@@ -103,7 +103,8 @@ namespace WeaponReset
                         int count = item.stack;
                         int rare = item.rare;
                         item.SetDefaults(item.type);
-                        item.prefix = prefix;
+                        item.Prefix(prefix);
+                        //item.prefix = prefix;
                         item.stack = count;
                         item.rare = rare;
                     }

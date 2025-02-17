@@ -1333,7 +1333,7 @@ namespace WeaponReset.Content.Weapons.SPAtkSwords
 
         private float AttackSpeed()
         {
-            return Player.GetWeaponAttackSpeed(SpawnItem) * (SpawnItem.useTime + SpawnItem.useAnimation) / 2;
+            return (SpawnItem.useTime + SpawnItem.useAnimation) / 2 / Player.GetWeaponAttackSpeed(SpawnItem);
         }
 
         public static float swingChange(float time) => MathHelper.SmoothStep(0, 1f, MathF.Pow(time, 4.2f)); // 缓动函数

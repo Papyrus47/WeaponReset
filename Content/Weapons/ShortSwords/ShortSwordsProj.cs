@@ -292,6 +292,6 @@ namespace WeaponReset.Content.Weapons.ShortSwords
             Player.GetArmorPenetration(SpawnItem.DamageType) += SpawnItem.damage * 1.5f;
         }
         public virtual float GetSpurtLength() => Projectile.Size.Length() * 6.5f;
-        public virtual int GetAttackSeepd() => (int)((SpawnItem.useTime + SpawnItem.useAnimation) / 2 * Player.GetWeaponAttackSpeed(SpawnItem));
+        public virtual int GetAttackSeepd() => (int)((SpawnItem.useTime + SpawnItem.useAnimation) / 2 / Player.GetWeaponAttackSpeed(SpawnItem));
     }
 }

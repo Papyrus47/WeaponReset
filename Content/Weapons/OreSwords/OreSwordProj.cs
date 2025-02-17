@@ -254,7 +254,7 @@ namespace WeaponReset.Content.Weapons.OreSwords
                 Main.instance.CameraModifiers.Add(new PunchCameraModifier(Projectile.Center, Projectile.velocity.SafeNormalize(default).RotatedByRandom(0.7), 7f, 15f, 15));
             };
 
-            float attackSpeed = Player.GetWeaponAttackSpeed(SpawnItem) * (SpawnItem.useTime + SpawnItem.useAnimation) / 2;
+            float attackSpeed = (SpawnItem.useTime + SpawnItem.useAnimation) / 2 / Player.GetWeaponAttackSpeed(SpawnItem);
 
             ChangeToRot = (_) => // 改变玩家朝向与剑朝向的旋转
             {
