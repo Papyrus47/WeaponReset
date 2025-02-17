@@ -3,6 +3,8 @@ Projectiles: {
 	SwordQi.DisplayName: 剑气
 	// SPAtkSwordProj.DisplayName: S P Atk Sword Proj
 	// ShortSwordsProj.DisplayName: Short Swords Proj
+	// MagicCricleProj.DisplayName: Magic Cricle Proj
+	// MagicCricleProj_F.DisplayName: Magic Cricle Proj_ F
 }
 
 Configs: {
@@ -95,9 +97,22 @@ Content: {
 		}
 
 		MagicStaff: {
-			// NoShiftText: No Shift
-			// ShiftText: Shift
+			// NoShiftText: "{$Mods.WeaponReset.Content.Weapons.Guns.NoShiftText}"
+			ShiftText:
+				'''
+				<right> 召唤魔法阵(最多3个)。
+				魔法阵会发射同样的弹幕。
+				'''
 		}
+	}
+
+	MagicBokks: {
+		// NoShiftText: "{$Mods.WeaponReset.Content.Weapons.Guns.NoShiftText}"
+		ShiftText:
+			'''
+			<right> 召唤魔法阵(最多1个)。
+			魔法阵会发射同样的弹幕。
+			'''
 	}
 }
 

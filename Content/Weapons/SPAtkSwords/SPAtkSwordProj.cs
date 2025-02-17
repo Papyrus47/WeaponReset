@@ -122,7 +122,7 @@ namespace WeaponReset.Content.Weapons.SPAtkSwords
                                 {
                                     OnHitEffect(target,hit,dmg);
                                     Main.instance.CameraModifiers.Add(new PunchCameraModifier(Projectile.Center, Main.rand.NextVector2Unit(), 15, 2, 7));
-                                    if(Projectile.numHits < 20)
+                                    if(Projectile.numHits < 10)
                                         TheUtility.ResetProjHit(Projectile);
                                 },
                                 ModifyHit = LastModifyHit,
@@ -467,7 +467,7 @@ namespace WeaponReset.Content.Weapons.SPAtkSwords
                                 VelScale = new Vector2(2, 2f), // 速度缩放
                                 VisualRotation = 0f, // 视觉朝向
                                 OnHitStopTime = 3, // 击中后停留时间
-                                ActionDmg = 8f, // 伤害倍率
+                                ActionDmg = 4f, // 伤害倍率
                             },
                             preAtk: new() // 攻击前
                             {
@@ -515,7 +515,7 @@ namespace WeaponReset.Content.Weapons.SPAtkSwords
                                 VelScale = new Vector2(2, 1f), // 速度缩放
                                 VisualRotation = 0f, // 视觉朝向
                                 OnHitStopTime = 3, // 击中后停留时间
-                                ActionDmg = 8f, // 伤害倍率
+                                ActionDmg = 4f, // 伤害倍率
                             },
                             preAtk: new() // 攻击前
                             {
@@ -584,6 +584,8 @@ namespace WeaponReset.Content.Weapons.SPAtkSwords
                                 OnChange = (skill) =>
                                 {
                                     ChangeToRot(skill);
+                                    if(SpawnItem.type == ItemID_Chinese.泰拉刃)
+                                        Projectile.damage += SPAtkSwordGlobalItem.Charged;
                                     Projectile.damage += SPAtkSwordGlobalItem.Charged / 4;
                                     UseCharged(SPAtkSwordGlobalItem.Charged);
                                 }
@@ -626,7 +628,7 @@ namespace WeaponReset.Content.Weapons.SPAtkSwords
                                     }
                                 }
 
-                            }, SwingHelper, Player,5)
+                            }, SwingHelper, Player,SpawnItem.type == ItemID_Chinese.泰拉刃 ? 15 : 5)
                             {
                                 CanMoveScreen = true,
                             }
@@ -1358,7 +1360,7 @@ namespace WeaponReset.Content.Weapons.SPAtkSwords
         {
             //if (Projectile.numHits > 0)
             //    return;
-            DamageAdd += swingHelper_GeneralSwing.setting.ActionDmg * 0.5f + Projectile.numHits * 0.7f;
+            DamageAdd += swingHelper_GeneralSwing.setting.ActionDmg * 0.2f + MathF.Pow(Projectile.numHits * 0.3f,0.5f);
         }
         public virtual void Defence(Player player, Entity target, ref Player.HurtModifiers hurtModifiers)
         {

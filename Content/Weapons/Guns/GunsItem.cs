@@ -151,6 +151,10 @@ namespace WeaponReset.Content.Weapons.Guns
                     ManaStrong++;
                 }
             }
+            if (GunsHotCD > 0)
+            {
+                Dust.NewDustPerfect((player.compositeFrontArm.rotation + MathHelper.PiOver2).ToRotationVector2() * 0.8f * item.width + player.MountedCenter, DustID.Smoke, null, 100);
+            }
         }
         public override void UpdateInventory(Item item, Player player)
         {
@@ -161,10 +165,7 @@ namespace WeaponReset.Content.Weapons.Guns
                     GunsHot--;
             }
             if (GunsHotCD > 0)
-            {
-                Dust.NewDustPerfect((player.compositeFrontArm.rotation + MathHelper.PiOver2).ToRotationVector2() * 0.8f * item.width + player.MountedCenter, DustID.Smoke, null, 100);
                 GunsHotCD--;
-            }
             if (GunsHotTime > 0)
             {
                 if (player.ItemTimeIsZero)
@@ -185,8 +186,8 @@ namespace WeaponReset.Content.Weapons.Guns
                             Dust.NewDustPerfect((player.compositeFrontArm.rotation + MathHelper.PiOver2).ToRotationVector2() * 0.8f * item.width + player.MountedCenter, DustID.FireworksRGB, Main.rand.NextVector2Unit() * 8, 0, Color.OrangeRed, 1.4f);
                         }
                         SoundEngine.PlaySound(SoundID.Item14, player.position);
-                        GunsHotTime = 300;
-                        GunsHotCD = 300;
+                        GunsHotTime = 600;
+                        GunsHotCD = 600;
                     }
                 }
                 if (GunsHotTime <= 0)

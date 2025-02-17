@@ -95,7 +95,7 @@ namespace WeaponReset.Content.Weapons.Bows
 
         public static IEntitySource On_Player_GetProjectileSource_Item_WithPotentialAmmo(On_Player.orig_GetProjectileSource_Item_WithPotentialAmmo orig, Player self, Item item, int ammoItemId)
         {
-            if (item.TryGetGlobalItem<BowsItem>(out var bow))
+            if (ResetWeaponID.Contains(item.type) && item.TryGetGlobalItem<BowsItem>(out var bow))
             {
                 return new BowUseBottleSource(self, item, ammoItemId, null)
                 {

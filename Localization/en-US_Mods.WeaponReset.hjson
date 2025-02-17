@@ -3,6 +3,8 @@ Projectiles: {
 	SwordQi.DisplayName: Sword Qi
 	SPAtkSwordProj.DisplayName: S P Atk Sword Proj
 	ShortSwordsProj.DisplayName: Short Swords Proj
+	MagicCricleProj.DisplayName: Magic Cricle Proj
+	MagicCricleProj_F.DisplayName: Magic Cricle Proj_ F
 }
 
 Configs: {
@@ -95,9 +97,22 @@ Content: {
 		}
 
 		MagicStaff: {
-			NoShiftText: No Shift
-			ShiftText: Shift
+			NoShiftText: "{$Mods.WeaponReset.Content.Weapons.Guns.NoShiftText}"
+			ShiftText:
+				'''
+				<right> summon magic cricle(max summon 3).
+				magic cricle will shoot same projectile.
+				'''
 		}
+	}
+
+	MagicBokks: {
+		NoShiftText: "{$Mods.WeaponReset.Content.Weapons.Guns.NoShiftText}"
+		ShiftText:
+			'''
+			<right> summon magic cricle(max summon 1).
+			magic cricle will shoot same projectile.
+			'''
 	}
 }
 
