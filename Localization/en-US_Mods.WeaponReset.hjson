@@ -6,6 +6,7 @@ Projectiles: {
 	MagicCricleProj.DisplayName: Magic Cricle Proj
 	MagicCricleProj_F.DisplayName: Magic Cricle Proj_ F
 	ShitProj.DisplayName: Shit Proj
+	LightBallProj.DisplayName: Light Ball Proj
 }
 
 Configs: {

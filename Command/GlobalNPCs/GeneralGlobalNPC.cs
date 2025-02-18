@@ -17,6 +17,7 @@ namespace WeaponReset.Command.GlobalNPCs
             public int Strength;
         }
         public NPCBuffs Vulnerable;
+        public int SmolstarMark;
         public override bool InstancePerEntity => true;
         public override void Load()
         {
@@ -45,16 +46,31 @@ namespace WeaponReset.Command.GlobalNPCs
             }
             return orig.Invoke(self, Damage, knockBack, hitDirection, crit, fromNet, noPlayerInteraction);
         }
-
+        public override void ResetEffects(NPC npc)
+        {
+            if (SmolstarMark > 0)
+            {
+                SmolstarMark--;
+                if (SmolstarMark % 15 == 3)
+                {
+                    for (float i = 0; i < 6.28f; i += 0.25f)
+                    {
+                        Dust.NewDustPerfect(npc.Center, DustID.YellowStarDust, Vector2.UnitY.RotatedBy(i + Main.GlobalTimeWrappedHourly), 100, Color.Lerp(Color.White,Color.Pink,i),1.2f);
+                    }
+                }
+            }
+        }
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
             binaryWriter.Write(Vulnerable.Conuts);
             binaryWriter.Write(Vulnerable.Strength);
+            binaryWriter.Write(SmolstarMark);
         }
         public override void ReceiveExtraAI(NPC npc, BitReader bitReader, BinaryReader binaryReader)
         {
             Vulnerable.Conuts = binaryReader.ReadInt32();
             Vulnerable.Strength = binaryReader.ReadInt32();
+            SmolstarMark = binaryReader.ReadInt32();
         }
         public override void DrawEffects(NPC npc, ref Color drawColor)
         {
