@@ -5,6 +5,7 @@ Projectiles: {
 	ShortSwordsProj.DisplayName: Short Swords Proj
 	MagicCricleProj.DisplayName: Magic Cricle Proj
 	MagicCricleProj_F.DisplayName: Magic Cricle Proj_ F
+	ShitProj.DisplayName: Shit Proj
 }
 
 Configs: {

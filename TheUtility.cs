@@ -139,5 +139,21 @@ namespace WeaponReset
         {
             return Language.GetOrRegister(key, () => key).Value;
         }
+        public static NPC FindNPC_ClosestToPlayer(this Projectile proj,Player player, float range,bool checkHit = false)
+        {
+            NPC target = null;
+            foreach (NPC n in Main.npc)
+            {
+                float dis = n.Distance(player.position);
+                if(dis < range && n.CanBeChasedBy() && (!checkHit || (checkHit && Collision.CanHit(player.position, 1, 1, n.Center, 1, 1))))
+                {
+                    target = n;
+                    range = dis;
+                }
+            }
+            if (proj.OwnerMinionAttackTargetNPC != null)
+                target = proj.OwnerMinionAttackTargetNPC;
+            return target;
+        }
     }
 }

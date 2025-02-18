@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -14,31 +14,31 @@ namespace WeaponReset.Content.Weapons.Guns
     public class GunsItem : BasicWeaponsItems<GunsItem>
     {
         /// <summary>
-        /// Ç¹¿Ú¹ıÈÈ
+        /// æªå£è¿‡çƒ­
         /// </summary>
         public int GunsHot;
         /// <summary>
-        /// Ç¹¿Ú¹ıÈÈ³ÖĞøÊ±¼ä
+        /// æªå£è¿‡çƒ­æŒç»­æ—¶é—´
         /// </summary>
         public int GunsHotTime;
         /// <summary>
-        /// Ç¹¿Ú¹ıÈÈÖØÖÃÊ±¼ä
+        /// æªå£è¿‡çƒ­é‡ç½®æ—¶é—´
         /// </summary>
         public int GunsHotReset;
         /// <summary>
-        /// Ç¹¿Ú¹ıÈÈ×î´óÖµ
+        /// æªå£è¿‡çƒ­æœ€å¤§å€¼
         /// </summary>
         public int GunsHotMax = 15;
         /// <summary>
-        /// Ç¹¿Ú¹ıÈÈÀäÈ´Ê±¼ä
+        /// æªå£è¿‡çƒ­å†·å´æ—¶é—´
         /// </summary>
         public int GunsHotCD;
         /// <summary>
-        /// Ñ°ÕÒµ¯Ò©Ë÷Òı
+        /// å¯»æ‰¾å¼¹è¯ç´¢å¼•
         /// </summary>
         public static int FindGunsBulletIndex;
         /// <summary>
-        /// ×Óµ¯Ç¿»¯
+        /// å­å¼¹å¼ºåŒ–
         /// </summary>
         public int ManaStrong;
         public override bool InstancePerEntity => true;
@@ -50,30 +50,30 @@ namespace WeaponReset.Content.Weapons.Guns
             // On_Player.PickAmmo_Item_refInt32_refSingle_refBoolean_refInt32_refSingle_refInt32_bool += On_Player_PickAmmo_Item_refInt32_refSingle_refBoolean_refInt32_refSingle_refInt32_bool;\
             ResetWeaponID ??= new HashSet<int>();
             ResetWeaponID.TryAddArray([
-                ItemID_Chinese.ºìÀ³µÂÇ¹,
-                ItemID_Chinese.ìİ·¢Ç¹,
-                ItemID_Chinese.»ğÇ¹,
-                ItemID_Chinese.¶áÃüÇ¹,
-                ItemID_Chinese.ö±µ¯Ç¹,
-                ItemID_Chinese.×óÂÖÊÖÇ¹,
-                ItemID_Chinese.ÃÔÄãöè,
-                ItemID_Chinese.Èı·¢ÁÔÇ¹,
-                ItemID_Chinese.ËÄ¹Üö±µ¯Ç¹,
-                ItemID_Chinese.ÊÖÇ¹,
-                ItemID_Chinese.·ï»Ë±¬ÆÆÇ¹,
-                ItemID_Chinese.ÆøÀ®°È,
-                ItemID_Chinese.·¢ÌõÊ½Í»»÷²½Ç¹,
-                ItemID_Chinese.öùÓã»ú¹ØÇ¹,
-                ItemID_Chinese.Âêè§±¬ÆÆÇ¹,
-                ItemID_Chinese.ÎÚ×È³å·æÇ¹,
-                ItemID_Chinese.¾ŞÊŞöè,
-                ItemID_Chinese.Î¬ÄÉË¹ÍòÄÜÇ¹,
-                ItemID_Chinese.Õ½Êõö±µ¯Ç¹,
-                ItemID_Chinese.¾Ñ»÷²½Ç¹,
-                ItemID_Chinese.ÓñÃ×ÌÇ²½Ç¹,
-                ItemID_Chinese.Á´Ê½»úÇ¹,
-                ItemID_Chinese.ÍâĞÇö±µ¯Ç¹,
-                ItemID_Chinese.Ì«¿Õº£ëà»úÇ¹
+                ItemID_Chinese.çº¢è±å¾·æª,
+                ItemID_Chinese.ç‡§å‘æª,
+                ItemID_Chinese.ç«æª,
+                ItemID_Chinese.å¤ºå‘½æª,
+                ItemID_Chinese.éœ°å¼¹æª,
+                ItemID_Chinese.å·¦è½®æ‰‹æª,
+                ItemID_Chinese.è¿·ä½ é²¨,
+                ItemID_Chinese.ä¸‰å‘çŒæª,
+                ItemID_Chinese.å››ç®¡éœ°å¼¹æª,
+                ItemID_Chinese.æ‰‹æª,
+                ItemID_Chinese.å‡¤å‡°çˆ†ç ´æª,
+                ItemID_Chinese.æ°”å–‡å­,
+                ItemID_Chinese.å‘æ¡å¼çªå‡»æ­¥æª,
+                ItemID_Chinese.é³„é±¼æœºå…³æª,
+                ItemID_Chinese.ç›ç‘™çˆ†ç ´æª,
+                ItemID_Chinese.ä¹Œå…¹å†²é”‹æª,
+                ItemID_Chinese.å·¨å…½é²¨,
+                ItemID_Chinese.ç»´çº³æ–¯ä¸‡èƒ½æª,
+                ItemID_Chinese.æˆ˜æœ¯éœ°å¼¹æª,
+                ItemID_Chinese.ç‹™å‡»æ­¥æª,
+                ItemID_Chinese.ç‰ç±³ç³–æ­¥æª,
+                ItemID_Chinese.é“¾å¼æœºæª,
+                ItemID_Chinese.å¤–æ˜Ÿéœ°å¼¹æª,
+                ItemID_Chinese.å¤ªç©ºæµ·è±šæœºæª
                 ]);
 
             On_Player.ChooseAmmo += On_Player_ChooseAmmo;
@@ -211,9 +211,9 @@ namespace WeaponReset.Content.Weapons.Guns
             float factor = timeMax;
             factor = MathF.Pow(Math.Abs(factor - 0.5f), 1.2f);
             if(timeMax >= 0.55f)
-                player.itemRotation -= factor * player.direction * MathHelper.PiOver4 * 0.25f; // ĞŞ¸ÄÍæ¼ÒĞı×ª½Ç¶È
+                player.itemRotation -= factor * player.direction * MathHelper.PiOver4 * 0.25f; // ä¿®æ”¹ç©å®¶æ—‹è½¬è§’åº¦
             else
-                player.itemRotation += factor * player.direction * MathHelper.PiOver4 * 0.25f; // ĞŞ¸ÄÍæ¼ÒĞı×ª½Ç¶È
+                player.itemRotation += factor * player.direction * MathHelper.PiOver4 * 0.25f; // ä¿®æ”¹ç©å®¶æ—‹è½¬è§’åº¦
         }
         public override void HoldStyle(Item item,Player player, Rectangle heldItemFrame)
         {
@@ -224,13 +224,13 @@ namespace WeaponReset.Content.Weapons.Guns
         public override void PostDrawInInventory(Item item, SpriteBatch spriteBatch, Vector2 position, Rectangle frame, Color drawColor, Color itemColor, Vector2 origin, float scale)
         {
             Player localPlayer = Main.LocalPlayer;
-            if (localPlayer.HeldItem == item) // Íæ¼ÒÊÖ³ÖÎïÆ·
+            if (localPlayer.HeldItem == item) // ç©å®¶æ‰‹æŒç‰©å“
             {
-                #region ¼ÓÔØUIÌùÍ¼
+                #region åŠ è½½UIè´´å›¾
                 if (!ModContent.Request<Texture2D>("WeaponReset/Content/Weapons/Guns/GunsUI").IsLoaded)
                     _ = ModContent.Request<Texture2D>("WeaponReset/Content/Weapons/Guns/GunsUI");
                 #endregion
-                #region »æÖÆ
+                #region ç»˜åˆ¶
                 Texture2D tex = ModContent.Request<Texture2D>("WeaponReset/Content/Weapons/Guns/GunsUI").Value;
                 Rectangle rect = tex.Frame(horizontalFrames: 1, verticalFrames: 2, 0, 0, 0, 0);
                 Rectangle rect_line = tex.Frame(horizontalFrames: 1, verticalFrames: 2, 0, 1, 0, 0);
@@ -239,9 +239,9 @@ namespace WeaponReset.Content.Weapons.Guns
                 spriteBatch.Draw(tex, Main.LocalPlayer.Top + new Vector2(6, -20) - Main.screenPosition, rect_line, Color.White, 0, rect.Size() * 0.5f, 1, SpriteEffects.None, 0);
                 spriteBatch.Draw(tex, Main.LocalPlayer.Top + new Vector2(0, -20) - Main.screenPosition, rect, Color.White, 0, rect.Size() * 0.5f, 1, SpriteEffects.None, 0);
                 #endregion
-                #region »æÖÆ×Óµ¯ÀàĞÍ
-                Item drawItem = localPlayer.ChooseAmmo(item); // Ñ¡Ôñµ¯Ò©
-                if (drawItem != null && !drawItem.IsAir) // ´æÔÚ²Å¿ªÊ¼ÏÂÃæµÄ»æÖÆÄÚÈİ
+                #region ç»˜åˆ¶å­å¼¹ç±»å‹
+                Item drawItem = localPlayer.ChooseAmmo(item); // é€‰æ‹©å¼¹è¯
+                if (drawItem != null && !drawItem.IsAir) // å­˜åœ¨æ‰å¼€å§‹ä¸‹é¢çš„ç»˜åˆ¶å†…å®¹
                 {
                     Main.instance.LoadItem(drawItem.type);
                     tex = TextureAssets.Item[drawItem.type].Value;
