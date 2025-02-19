@@ -60,6 +60,12 @@ namespace WeaponReset.Command.GlobalNPCs
                 }
             }
         }
+        public override void AI(NPC npc)
+        {
+            base.AI(npc);
+            if(npc.HasBuff(BuffID.Slow))
+                npc.position -= npc.velocity * 0.5f;
+        }
         public override void SendExtraAI(NPC npc, BitWriter bitWriter, BinaryWriter binaryWriter)
         {
             binaryWriter.Write(Vulnerable.Conuts);
