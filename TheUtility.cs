@@ -141,18 +141,18 @@ namespace WeaponReset
         }
         public static NPC FindNPC_ClosestToPlayer(this Projectile proj,Player player, float range,bool checkHit = false)
         {
+            if (proj.OwnerMinionAttackTargetNPC != null && proj.OwnerMinionAttackTargetNPC.Distance(player.Center) < range)
+                return proj.OwnerMinionAttackTargetNPC;
             NPC target = null;
             foreach (NPC n in Main.npc)
             {
                 float dis = n.Distance(player.position);
-                if(dis < range && n.CanBeChasedBy() && (!checkHit || (checkHit && Collision.CanHit(player.position, 1, 1, n.Center, 1, 1))))
+                if(dis < range && n.CanBeChasedBy() && (!checkHit || (checkHit && Collision.CanHit(player.Center, 1, 1, n.Center, 1, 1))))
                 {
                     target = n;
                     range = dis;
                 }
             }
-            if (proj.OwnerMinionAttackTargetNPC != null)
-                target = proj.OwnerMinionAttackTargetNPC;
             return target;
         }
     }
